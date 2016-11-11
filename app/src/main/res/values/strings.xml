@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">oriental_coach</string>
+    <string name="main_tab_home">首页</string>
+    <string name="main_tab_my">我的</string>
+    <string name="student_managerment">学员管理</string>
+    <string name="daily_plan">日程安排</string>
+    <string name="orders_managerment">订单管理</string>
+    <string name="statistic_managerment">统计管理</string>
+    <string name="my_signature">个性签名</string>
+    <string name="my_train_field">训练场地</string>
+    <string name="my_car_type">车型</string>
+    <string name="my_training_subject">培训科目</string>
+    <string name="my_order_message">订单消息</string>
+    <string name="my_share">一键分享</string>
+    <string name="my_setting">设置</string>
+    <string name="my_driving_years">驾龄</string>
+    <string name="my_student_total">累计学员</string>
+    <string name="my_feedback_rate">好评率（%）</string>
+</resources>

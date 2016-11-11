@@ -1,0 +1,26 @@
+<resources>
+
+
+    <style name="divider_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/grey_cccccc</item>
+    </style>
+    <style name="divider_line_dedede">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/grey_dedede</item>
+    </style>
+
+    <style name="divider_line_vertical">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/grey_cccccc</item>
+    </style>
+
+    <style name="roomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+    </style>
+</resources>
