@@ -7,12 +7,51 @@
     <include layout="@layout/header_layout" />
 
     <RadioGroup
-        android:id="@+id/rg_daily_plan_day"
+        android:id="@+id/rg_statistic_detail"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/white_ffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/rb_statistic_detail_daily"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/selector_rb_statistic_detail_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="日统计"
+            android:textColor="@drawable/selector_rb_statistic_detail_text"
+            android:textSize="14sp" />
+
+        <View style="@style/divider_line_vertical" />
+
+        <RadioButton
+            android:id="@+id/rb_statistic_detail_month"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/selector_rb_statistic_detail_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="月统计"
+            android:textColor="@drawable/selector_rb_statistic_detail_text"
+            android:textSize="14sp" />
+
+        <View style="@style/divider_line_vertical" />
+
+        <RadioButton
+            android:id="@+id/rb_statistic_detail_year"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/selector_rb_statistic_detail_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="年统计"
+            android:textColor="@drawable/selector_rb_statistic_detail_text"
+            android:textSize="14sp" />
     </RadioGroup>
 </LinearLayout>

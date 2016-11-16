@@ -21,11 +21,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -35,11 +35,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -49,11 +49,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -63,11 +63,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -77,11 +77,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -91,11 +91,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
         <RadioButton
@@ -105,11 +105,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"
-            android:background="@drawable/rb_daily_plan_bg"
+            android:background="@drawable/selector_rb_daily_plan_bg"
             android:button="@null"
             android:gravity="center"
             android:text=""
-            android:textColor="@drawable/rb_daily_plan_text"
+            android:textColor="@drawable/selector_rb_daily_plan_text"
             android:textSize="12sp" />
 
     </RadioGroup>
