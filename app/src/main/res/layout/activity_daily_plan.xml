@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_layout" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/white_ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rb_daily_plan_day_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/rb_daily_plan_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@drawable/rb_daily_plan_text"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+</LinearLayout>

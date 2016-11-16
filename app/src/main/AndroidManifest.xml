@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.StatisticManagermentActivity">
-
+        <activity android:name=".activity.StatisticManagermentActivity"></activity>
+        <activity android:name=".activity.DailyPlanActivity">
         </activity>
     </application>
 
