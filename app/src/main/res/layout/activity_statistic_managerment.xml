@@ -16,6 +16,7 @@
         android:paddingTop="10dp">
 
         <RelativeLayout
+            android:id="@+id/rl_statistic_daily"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@color/white_ffffff"
@@ -124,6 +125,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_statistic_month"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
@@ -233,6 +235,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_statistic_year"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"

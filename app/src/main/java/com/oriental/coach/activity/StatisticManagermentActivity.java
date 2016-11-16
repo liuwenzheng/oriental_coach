@@ -1,10 +1,12 @@
 package com.oriental.coach.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 
 import butterknife.Bind;
@@ -38,23 +40,40 @@ public class StatisticManagermentActivity extends Activity {
     TextView tvStatisticYearMoneyAmount;
     @Bind(R.id.tv_statistic_year_money_part)
     TextView tvStatisticYearMoneyPart;
+    public static final int TYPE_STATISTIC_DAILY = 1;
+    public static final int TYPE_STATISTIC_MONTH = 2;
+    public static final int TYPE_STATISTIC_YEAR = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic_managerment);
         ButterKnife.bind(this);
-        tvHeaderTitle.setText("管理统计");
+        tvHeaderTitle.setText("统计管理");
     }
 
 
-    @OnClick({R.id.iv_header_back})
+    @OnClick({R.id.iv_header_back, R.id.rl_statistic_daily, R.id.rl_statistic_month, R.id.rl_statistic_year})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.iv_header_back:
                 finish();
                 break;
-            case R.id.tv_header_title:
+            case R.id.rl_statistic_daily:
+                intent = new Intent(this, StatisticDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_STATISTIC, TYPE_STATISTIC_DAILY);
+                startActivity(intent);
+                break;
+            case R.id.rl_statistic_month:
+                intent = new Intent(this, StatisticDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_STATISTIC, TYPE_STATISTIC_MONTH);
+                startActivity(intent);
+                break;
+            case R.id.rl_statistic_year:
+                intent = new Intent(this, StatisticDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_STATISTIC, TYPE_STATISTIC_YEAR);
+                startActivity(intent);
                 break;
         }
     }

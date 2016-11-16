@@ -13,4 +13,7 @@ public class Constants {
     public static final String PATTERN_MM_DD = "MM/dd";
     public static final String PATTERN_MM_DD_2 = "MM-dd";
     public static final String PATTERN_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+    // extra key
+    public static final String EXTRA_KEY_STATISTIC = "extra_key_statistic";
+
 }

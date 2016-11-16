@@ -16,8 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.StatisticManagermentActivity"></activity>
-        <activity android:name=".activity.DailyPlanActivity">
-        </activity>
+        <activity android:name=".activity.DailyPlanActivity"></activity>
+        <activity android:name=".activity.StatisticDetailActivity"></activity>
     </application>
 
 </manifest>
