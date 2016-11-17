@@ -7,7 +7,7 @@
     <include layout="@layout/header_layout" />
 
     <RadioGroup
-        android:id="@+id/rg_statistic_detail"
+        android:id="@+id/rg_order_managerment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white_ffffff"
@@ -15,49 +15,55 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rb_statistic_detail_daily"
+            android:id="@+id/rb_order_managerment_finished"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/selector_rb_common_bg"
             android:button="@null"
             android:gravity="center"
-            android:text="日统计"
+            android:tag="0"
+            android:text="已完成订单"
             android:textColor="@drawable/selector_rb_common_text"
             android:textSize="14sp" />
 
         <View style="@style/divider_line_vertical" />
 
         <RadioButton
-            android:id="@+id/rb_statistic_detail_month"
+            android:id="@+id/rb_order_managerment_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/selector_rb_common_bg"
             android:button="@null"
             android:gravity="center"
-            android:text="月统计"
+            android:tag="1"
+            android:text="已取消订单"
             android:textColor="@drawable/selector_rb_common_text"
             android:textSize="14sp" />
 
         <View style="@style/divider_line_vertical" />
 
         <RadioButton
-            android:id="@+id/rb_statistic_detail_year"
+            android:id="@+id/rb_order_managerment_unfinished"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/selector_rb_common_bg"
             android:button="@null"
             android:gravity="center"
-            android:text="年统计"
+            android:tag="2"
+            android:text="未完成订单"
             android:textColor="@drawable/selector_rb_common_text"
             android:textSize="14sp" />
     </RadioGroup>
 
-    <FrameLayout
-        android:id="@+id/fl_fragment_container"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.0"></FrameLayout>
+        android:layout_weight="1.0"
+        android:background="@color/grey_efefef"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
