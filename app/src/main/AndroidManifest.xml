@@ -19,6 +19,7 @@
         <activity android:name=".activity.DailyPlanActivity"></activity>
         <activity android:name=".activity.StatisticDetailActivity"></activity>
         <activity android:name=".activity.OrderManagermentActivity"></activity>
+        <activity android:name=".activity.StudentManagermentActivity"></activity>
     </application>
 
 </manifest>

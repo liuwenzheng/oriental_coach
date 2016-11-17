@@ -14,6 +14,7 @@ import com.oriental.coach.R;
 import com.oriental.coach.activity.DailyPlanActivity;
 import com.oriental.coach.activity.OrderManagermentActivity;
 import com.oriental.coach.activity.StatisticManagermentActivity;
+import com.oriental.coach.activity.StudentManagermentActivity;
 import com.oriental.coach.utils.LogModule;
 import com.zcw.togglebutton.ToggleButton;
 
@@ -117,6 +118,8 @@ public class MainCoachFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.fl_student:
+                intent = new Intent(getActivity(), StudentManagermentActivity.class);
+                startActivity(intent);
                 break;
             case R.id.fl_daily:
                 intent = new Intent(getActivity(), DailyPlanActivity.class);

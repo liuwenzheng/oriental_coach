@@ -16,7 +16,8 @@
     <string name="my_driving_years">驾龄</string>
     <string name="my_student_total">累计学员</string>
     <string name="my_feedback_rate">好评率（%）</string>
-    <string name="order_item_phonenumber">电话：%s</string>
-    <string name="order_item_price">价格：%s</string>
-    <string name="order_item_pay_type">支付类型：%s</string>
+    <string name="phonenumber">电话：%s</string>
+    <string name="price">价格：%s</string>
+    <string name="pay_type">支付类型：%s</string>
+    <string name="identity_card">身份证：%s</string>
 </resources>

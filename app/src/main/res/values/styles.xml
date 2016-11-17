@@ -6,6 +6,7 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/grey_cccccc</item>
     </style>
+
     <style name="divider_line_dedede">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
@@ -23,4 +24,5 @@
         <item name="android:minHeight">10dp</item>
         <item name="android:maxHeight">10dp</item>
     </style>
+
 </resources>

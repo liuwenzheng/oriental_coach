@@ -66,9 +66,9 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         holder.tvName.setText(entity.name);
         holder.tvSubject.setText(entity.subject);
-        holder.tvPhonenumber.setText(mContext.getString(R.string.order_item_phonenumber, entity.phonenumber));
-        holder.tvPrice.setText(mContext.getString(R.string.order_item_price, entity.price));
-        holder.tvPayType.setText(mContext.getString(R.string.order_item_pay_type, entity.payType));
+        holder.tvPhonenumber.setText(mContext.getString(R.string.phonenumber, entity.phonenumber));
+        holder.tvPrice.setText(mContext.getString(R.string.price, entity.price));
+        holder.tvPayType.setText(mContext.getString(R.string.pay_type, entity.payType));
         holder.tvCreateTime.setText(entity.createTime);
         holder.tvOrderNumber.setText(entity.orderNumber);
         holder.tvCourseTime.setText(entity.courseTime);

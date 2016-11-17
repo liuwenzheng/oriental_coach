@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="49dp"
     android:background="@color/blue_4c6f98">
@@ -21,4 +22,33 @@
         android:text=""
         android:textColor="@color/white_ffffff"
         android:textSize="16sp" />
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/sg_student_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:sc_checked_text_color="@color/blue_4c6f98"
+        app:sc_tint_color="@color/white_ffffff">
+
+        <RadioButton
+            android:id="@+id/rb_subject_two"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:button="@null"
+            android:gravity="center"
+            android:text="科二"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_subject_three"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:button="@null"
+            android:gravity="center"
+            android:text="科三"
+            android:textSize="14sp" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
 </RelativeLayout>
