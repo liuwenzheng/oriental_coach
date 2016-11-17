@@ -40,9 +40,9 @@ public class StatisticManagermentActivity extends Activity {
     TextView tvStatisticYearMoneyAmount;
     @Bind(R.id.tv_statistic_year_money_part)
     TextView tvStatisticYearMoneyPart;
-    public static final int TYPE_STATISTIC_DAILY = 1;
-    public static final int TYPE_STATISTIC_MONTH = 2;
-    public static final int TYPE_STATISTIC_YEAR = 3;
+    public static final int TYPE_STATISTIC_DAILY = 0;
+    public static final int TYPE_STATISTIC_MONTH = 1;
+    public static final int TYPE_STATISTIC_YEAR = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

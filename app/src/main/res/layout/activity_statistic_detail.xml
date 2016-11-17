@@ -54,4 +54,10 @@
             android:textColor="@drawable/selector_rb_statistic_detail_text"
             android:textSize="14sp" />
     </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"></FrameLayout>
 </LinearLayout>
