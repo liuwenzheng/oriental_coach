@@ -41,7 +41,7 @@ public class SettingActivity extends Activity {
         });
     }
 
-    @OnClick({R.id.iv_header_back, R.id.btn_login, R.id.rl_modify_password})
+    @OnClick({R.id.iv_header_back, R.id.btn_logout, R.id.rl_modify_password})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_header_back:
