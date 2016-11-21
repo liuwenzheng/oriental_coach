@@ -21,6 +21,7 @@
         <activity android:name=".activity.OrderManagermentActivity"></activity>
         <activity android:name=".activity.StudentManagermentActivity"></activity>
         <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>

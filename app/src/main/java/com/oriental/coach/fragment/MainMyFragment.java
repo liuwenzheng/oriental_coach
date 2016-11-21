@@ -1,5 +1,6 @@
 package com.oriental.coach.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
+import com.oriental.coach.activity.SettingActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -67,6 +69,7 @@ public class MainMyFragment extends Fragment {
 
     @OnClick({R.id.ll_my_car_type, R.id.ll_my_order_message, R.id.ll_my_share, R.id.ll_my_setting})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.ll_my_car_type:
                 break;
@@ -75,6 +78,8 @@ public class MainMyFragment extends Fragment {
             case R.id.ll_my_share:
                 break;
             case R.id.ll_my_setting:
+                intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
                 break;
         }
     }

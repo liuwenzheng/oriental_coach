@@ -15,7 +15,7 @@ import butterknife.OnClick;
 /**
  * @Author lwz
  * @Date 2016/11/15 0012
- * @Describe 日程安排
+ * @Describe 登录
  */
 
 public class LoginActivity extends Activity {
