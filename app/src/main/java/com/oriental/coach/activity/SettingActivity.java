@@ -1,6 +1,7 @@
 package com.oriental.coach.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class SettingActivity extends Activity {
 
     @OnClick({R.id.iv_header_back, R.id.btn_logout, R.id.rl_modify_password})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.iv_header_back:
                 finish();
@@ -50,6 +52,8 @@ public class SettingActivity extends Activity {
             case R.id.btn_logout:
                 break;
             case R.id.rl_modify_password:
+                intent = new Intent(this, ModifyPasswordActivity.class);
+                startActivity(intent);
                 break;
         }
     }
