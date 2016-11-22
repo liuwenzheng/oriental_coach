@@ -61,6 +61,13 @@
                 android:text="密码修改"
                 android:textColor="@color/black_424242"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:src="@drawable/arrow_right" />
         </RelativeLayout>
 
         <View style="@style/divider_line" />
