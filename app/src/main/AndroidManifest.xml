@@ -25,6 +25,7 @@
         <activity android:name=".activity.ModifyPasswordActivity"></activity>
         <activity android:name=".activity.CarTypeActivity"></activity>
         <activity android:name=".activity.InsuranceRecordActivity"></activity>
+        <activity android:name=".activity.OrderMessageActivity"></activity>
     </application>
 
 </manifest>

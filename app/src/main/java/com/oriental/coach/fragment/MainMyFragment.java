@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.activity.CarTypeActivity;
+import com.oriental.coach.activity.OrderMessageActivity;
 import com.oriental.coach.activity.SettingActivity;
 
 import butterknife.Bind;
@@ -81,6 +82,8 @@ public class MainMyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.ll_my_order_message:
+                intent = new Intent(getActivity(), OrderMessageActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_my_share:
                 if (!getActivity().isFinishing() && mSharePopupWindow != null && mSharePopupWindow.isShowing()) {

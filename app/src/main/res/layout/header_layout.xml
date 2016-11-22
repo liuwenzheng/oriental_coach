@@ -51,4 +51,16 @@
             android:text="科三"
             android:textSize="14sp" />
     </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <TextView
+        android:id="@+id/tv_header_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text=""
+        android:textColor="@color/white_ffffff"
+        android:textSize="14sp" />
 </RelativeLayout>
