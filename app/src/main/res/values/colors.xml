@@ -14,9 +14,14 @@
     <color name="blue_4c6f98">#4c6f98</color>
     <color name="blue_167dcc">#167dcc</color>
     <color name="blue_0079bc">#0079bc</color>
+    <color name="blue_326f9b">#326f9b</color>
     <color name="black_333333">#333333</color>
     <color name="black_424242">#424242</color>
     <color name="black_666666">#666666</color>
     <color name="white_ffffff">#ffffff</color>
     <color name="red_d05450">#d05450</color>
+    <color name="orange_bc8022">#bc8022</color>
+    <color name="green_329925">#329925</color>
+    <color name="transparent_half">#77000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

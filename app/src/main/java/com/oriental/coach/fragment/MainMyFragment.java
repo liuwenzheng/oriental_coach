@@ -3,13 +3,17 @@ package com.oriental.coach.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
+import com.oriental.coach.activity.CarTypeActivity;
 import com.oriental.coach.activity.SettingActivity;
 
 import butterknife.Bind;
@@ -46,6 +50,7 @@ public class MainMyFragment extends Fragment {
     @Bind(R.id.tv_my_training_subject)
     TextView tv_my_training_subject;
 
+    private PopupWindow mSharePopupWindow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,15 +77,43 @@ public class MainMyFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.ll_my_car_type:
+                intent = new Intent(getActivity(), CarTypeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_my_order_message:
                 break;
             case R.id.ll_my_share:
+                if (!getActivity().isFinishing() && mSharePopupWindow != null && mSharePopupWindow.isShowing()) {
+                    showSharePopup(true);
+                } else {
+                    showSharePopup(false);
+                }
                 break;
             case R.id.ll_my_setting:
                 intent = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+
+    private void showSharePopup(boolean isShow) {
+        if (isShow) {
+            mSharePopupWindow.dismiss();
+        } else {
+            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.popup_share, null);
+            mSharePopupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT, false);
+            TextView tv_share_weixin = ButterKnife.findById(view, R.id.tv_share_weixin);
+            TextView tv_share_pengyouquan = ButterKnife.findById(view, R.id.tv_share_pengyouquan);
+            TextView tv_share_qq = ButterKnife.findById(view, R.id.tv_share_qq);
+            TextView tv_share_cancel = ButterKnife.findById(view, R.id.tv_share_cancel);
+            tv_share_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mSharePopupWindow.dismiss();
+                }
+            });
+            mSharePopupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.TOP, 0, 0);
         }
     }
 }

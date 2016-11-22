@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/white_ffffff"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <ImageView
+        android:id="@+id/iv_car_pic"
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/iv_car_pic"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_car_type_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:singleLine="true"
+                android:text="雪铁龙爱丽舍模拟型"
+                android:textColor="@color/black_424242"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_car_type_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:singleLine="true"
+                android:text="晋M1506学"
+                android:textColor="@color/grey_999999"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_insurance_record"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:background="@drawable/shape_corners_blue"
+                android:gravity="center"
+                android:text="保险记录"
+                android:textColor="@color/blue_326f9b"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_examine_record"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/shape_corners_orange"
+                android:gravity="center"
+                android:text="年检记录"
+                android:textColor="@color/orange_bc8022"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_maintenance_record"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/shape_corners_green"
+                android:gravity="center"
+                android:text="保养记录"
+                android:textColor="@color/green_329925"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
