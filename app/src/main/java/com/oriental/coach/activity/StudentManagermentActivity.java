@@ -31,12 +31,12 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class StudentManagermentActivity extends Activity {
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
-    @Bind(R.id.sg_student_header)
-    SegmentedGroup sgStudentHeader;
-    @Bind(R.id.rb_subject_two)
-    RadioButton rbSubjectTwo;
-    @Bind(R.id.rb_subject_three)
-    RadioButton rbSubjectThree;
+//    @Bind(R.id.sg_student_header)
+//    SegmentedGroup sgStudentHeader;
+//    @Bind(R.id.rb_subject_two)
+//    RadioButton rbSubjectTwo;
+//    @Bind(R.id.rb_subject_three)
+//    RadioButton rbSubjectThree;
     @Bind(R.id.rv_list)
     RecyclerView rvList;
     private StudentManagermentAdapter mAdapter;
@@ -47,27 +47,29 @@ public class StudentManagermentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_managerment);
         ButterKnife.bind(this);
-        tvHeaderTitle.setVisibility(View.GONE);
-        sgStudentHeader.setVisibility(View.VISIBLE);
-        sgStudentHeader.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                creatData(((RadioButton) group.findViewById(checkedId)).getText().toString());
-            }
-        });
+//        tvHeaderTitle.setVisibility(View.GONE);
+        tvHeaderTitle.setText("学员管理");
+//        sgStudentHeader.setVisibility(View.VISIBLE);
+//        sgStudentHeader.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                creatData(((RadioButton) group.findViewById(checkedId)).getText().toString());
+//            }
+//        });
         mStudents = new ArrayList<>();
         mAdapter = new StudentManagermentAdapter(this, mStudents);
         rvList.setLayoutManager(new LinearLayoutManager(this));
         rvList.setAdapter(mAdapter);
-        rbSubjectTwo.setChecked(true);
+//        rbSubjectTwo.setChecked(true);
+        creatData();
     }
 
-    private void creatData(String subject) {
+    private void creatData() {
         mStudents.clear();
         for (int i = 0; i < 20; i++) {
             Student student = new Student();
             student.gender = i % 2 == 0 ? 0 : 1;
-            student.name = subject;
+            student.name = "测试数据";
             student.phonenumber = "13201002093";
             student.identityCard = "410181192033021024";
             mStudents.add(student);

@@ -8,30 +8,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
-import com.oriental.coach.entity.ListEntity;
+import com.oriental.coach.entity.InsuranceRecord;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class InsuranceRecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
 
     private Context mContext;
-    private List<ListEntity> mEntities;
+    private List<InsuranceRecord> mEntities;
 
-    public ListItemAdapter(Context context, List<ListEntity> entities) {
+    public InsuranceRecordAdapter(Context context, List<InsuranceRecord> entities) {
         this.mContext = context;
         this.mEntities = entities;
     }
 
-    public void setDatas(List<ListEntity> entities) {
+    public void setDatas(List<InsuranceRecord> entities) {
         this.mEntities = entities;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_insurance_record, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -40,9 +41,11 @@ public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         initializeItemView((MyViewHolder) holder, mEntities.get(position));
     }
 
-    private void initializeItemView(MyViewHolder holder, ListEntity listEntity) {
-        holder.tvKey.setText(listEntity.key);
-        holder.tvValue.setText(listEntity.value);
+    private void initializeItemView(MyViewHolder holder, InsuranceRecord record) {
+        holder.tvCompany.setText(record.company);
+        holder.tvPrice.setText(record.price);
+        holder.tvStartDate.setText(record.startDate);
+        holder.tvEndDate.setText(record.endDate);
     }
 
     @Override
@@ -51,10 +54,14 @@ public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_key)
-        TextView tvKey;
-        @Bind(R.id.tv_value)
-        TextView tvValue;
+        @Bind(R.id.tv_company)
+        TextView tvCompany;
+        @Bind(R.id.tv_price)
+        TextView tvPrice;
+        @Bind(R.id.tv_start_date)
+        TextView tvStartDate;
+        @Bind(R.id.tv_end_date)
+        TextView tvEndDate;
 
         MyViewHolder(View view) {
             super(view);

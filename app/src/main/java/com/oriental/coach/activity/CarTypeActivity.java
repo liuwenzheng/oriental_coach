@@ -55,12 +55,16 @@ public class CarTypeActivity extends Activity implements CarTypeAdapter.CarTypeC
             CarType carType = new CarType();
             carType.name = "雪弗兰";
             carType.number = "晋121" + i;
-            InsuranceRecord record = new InsuranceRecord();
-            record.company = "中国平安";
-            record.price = "5000";
-            record.startDate = "2016-01-01";
-            record.endDate = "2018-01-01";
-            carType.insuranceRecord = record;
+            List<InsuranceRecord> records = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                InsuranceRecord record = new InsuranceRecord();
+                record.company = "中国平安"+j;
+                record.price = "5000";
+                record.startDate = "2016-01-01";
+                record.endDate = "2018-01-01";
+                records.add(record);
+            }
+            carType.insuranceRecords = records;
             mEntities.add(carType);
         }
         mAdapter.setDatas(mEntities);
@@ -80,7 +84,8 @@ public class CarTypeActivity extends Activity implements CarTypeAdapter.CarTypeC
     @Override
     public void insuranceRecordClick(CarType carType) {
         Intent intent = new Intent(this, InsuranceRecordActivity.class);
-        intent.putExtra(InsuranceRecordActivity.EXTRA_KEY_INSURANCE_RECORD, carType.insuranceRecord);
+        ArrayList<InsuranceRecord> records = new ArrayList<>(carType.insuranceRecords);
+        intent.putParcelableArrayListExtra(InsuranceRecordActivity.EXTRA_KEY_INSURANCE_RECORD, records);
         startActivity(intent);
     }
 

@@ -2,11 +2,16 @@ package com.oriental.coach.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
+import com.oriental.coach.adapter.InsuranceRecordAdapter;
 import com.oriental.coach.entity.InsuranceRecord;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,14 +28,9 @@ public class InsuranceRecordActivity extends Activity {
     public static final String EXTRA_KEY_INSURANCE_RECORD = "insurance_record";
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
-    @Bind(R.id.tv_company)
-    TextView tvCompany;
-    @Bind(R.id.tv_price)
-    TextView tvPrice;
-    @Bind(R.id.tv_start_date)
-    TextView tvStartDate;
-    @Bind(R.id.tv_end_date)
-    TextView tvEndDate;
+    @Bind(R.id.rv_list)
+    RecyclerView rvList;
+    private InsuranceRecordAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,10 @@ public class InsuranceRecordActivity extends Activity {
         ButterKnife.bind(this);
         tvHeaderTitle.setText("保险记录");
         if (getIntent() != null && getIntent().getExtras() != null) {
-            InsuranceRecord record = getIntent().getParcelableExtra(EXTRA_KEY_INSURANCE_RECORD);
-            tvCompany.setText(record.company);
-            tvPrice.setText(record.price);
-            tvStartDate.setText(record.startDate);
-            tvEndDate.setText(record.endDate);
+            ArrayList<InsuranceRecord> records = getIntent().getParcelableArrayListExtra(EXTRA_KEY_INSURANCE_RECORD);
+            rvList.setLayoutManager(new LinearLayoutManager(this));
+            mAdapter = new InsuranceRecordAdapter(this, records);
+            rvList.setAdapter(mAdapter);
         } else {
             finish();
         }

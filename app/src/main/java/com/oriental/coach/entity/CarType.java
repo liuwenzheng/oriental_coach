@@ -1,5 +1,7 @@
 package com.oriental.coach.entity;
 
+import java.util.List;
+
 /**
  * @Author lwz
  * @Date 2016/8/16 0016
@@ -13,5 +15,5 @@ public class CarType {
     // 车牌号
     public String number;
     // 保险记录
-    public InsuranceRecord insuranceRecord;
+    public List<InsuranceRecord> insuranceRecords;
 }
