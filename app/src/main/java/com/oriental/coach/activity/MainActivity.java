@@ -1,9 +1,12 @@
 package com.oriental.coach.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.oriental.coach.R;
@@ -23,6 +26,10 @@ public class MainActivity extends BaseActivity {
     Fragment mMainCoachFrament;
     Fragment mMainMyFragment;
     Fragment mCurrentFragment;
+    @Bind(R.id.btn_main_home)
+    Button btnMainHome;
+    @Bind(R.id.btn_main_my)
+    Button btnMainMy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,29 @@ public class MainActivity extends BaseActivity {
         initFragment();
         mCurrentFragment = mMainCoachFrament;
         mFragmentManager.beginTransaction().add(R.id.fl_fragment_container, mMainCoachFrament).commit();
+        selectedIcon();
+    }
+
+    private void selectedIcon() {
+        if (mCurrentFragment == mMainCoachFrament) {
+            Drawable homeTopDrawable = ContextCompat.getDrawable(this, R.drawable.home_selected);
+            homeTopDrawable.setBounds(0, 0, homeTopDrawable.getMinimumWidth(), homeTopDrawable.getMinimumHeight());
+            btnMainHome.setCompoundDrawables(null, homeTopDrawable, null, null);
+            Drawable myTopDrawable = ContextCompat.getDrawable(this, R.drawable.my_unselected);
+            myTopDrawable.setBounds(0, 0, myTopDrawable.getMinimumWidth(), myTopDrawable.getMinimumHeight());
+            btnMainMy.setCompoundDrawables(null, myTopDrawable, null, null);
+            btnMainHome.setTextColor(ContextCompat.getColor(this, R.color.blue_4c6f98));
+            btnMainMy.setTextColor(ContextCompat.getColor(this, R.color.grey_9a9a9a));
+        } else {
+            Drawable homeTopDrawable = ContextCompat.getDrawable(this, R.drawable.home_unselected);
+            homeTopDrawable.setBounds(0, 0, homeTopDrawable.getMinimumWidth(), homeTopDrawable.getMinimumHeight());
+            btnMainHome.setCompoundDrawables(null, homeTopDrawable, null, null);
+            Drawable myTopDrawable = ContextCompat.getDrawable(this, R.drawable.my_selected);
+            myTopDrawable.setBounds(0, 0, myTopDrawable.getMinimumWidth(), myTopDrawable.getMinimumHeight());
+            btnMainMy.setCompoundDrawables(null, myTopDrawable, null, null);
+            btnMainHome.setTextColor(ContextCompat.getColor(this, R.color.grey_9a9a9a));
+            btnMainMy.setTextColor(ContextCompat.getColor(this, R.color.blue_4c6f98));
+        }
     }
 
     private void switchFragement(Fragment fragment, FragmentTransaction fragmentTransaction) {
@@ -48,6 +78,7 @@ public class MainActivity extends BaseActivity {
             fragmentTransaction.hide(mCurrentFragment).show(fragment).commit();
         }
         mCurrentFragment = fragment;
+        selectedIcon();
     }
 
     private void initFragment() {
