@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.InsuranceRecordAdapter;
+import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.InsuranceRecord;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import butterknife.OnClick;
  * @Describe 登录
  */
 
-public class InsuranceRecordActivity extends Activity {
+public class InsuranceRecordActivity extends BaseActivity {
 
     public static final String EXTRA_KEY_INSURANCE_RECORD = "insurance_record";
     @Bind(R.id.tv_header_title)

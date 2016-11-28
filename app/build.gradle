@@ -28,4 +28,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile project(':ToggleButtonLib')
     compile 'info.hoang8f:android-segmented:1.0.6'
+    compile 'com.lzy.net:okgo:2.1.3'
+    compile 'com.google.code.gson:gson:2.8.0'
 }

@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
+import com.oriental.coach.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,7 +19,7 @@ import butterknife.OnClick;
  * @Describe 修改密码
  */
 
-public class ModifyPasswordActivity extends Activity {
+public class ModifyPasswordActivity extends BaseActivity {
 
 
     @Bind(R.id.tv_header_title)

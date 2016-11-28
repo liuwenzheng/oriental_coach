@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
+import com.oriental.coach.base.BaseActivity;
 import com.zcw.togglebutton.ToggleButton;
 
 import butterknife.Bind;
@@ -19,7 +20,7 @@ import butterknife.OnClick;
  * @Describe 设置
  */
 
-public class SettingActivity extends Activity {
+public class SettingActivity extends BaseActivity {
 
 
     @Bind(R.id.tv_header_title)

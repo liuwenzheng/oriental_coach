@@ -17,4 +17,5 @@ public class Constants {
     // extra key
     public static final String EXTRA_KEY_STATISTIC = "extra_key_statistic";
 
+    public static final String NET_STATE_CODE_OK = "ok";
 }

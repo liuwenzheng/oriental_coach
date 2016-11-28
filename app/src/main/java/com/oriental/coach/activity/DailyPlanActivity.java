@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.DailyPlanAdapter;
+import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.DailyPlan;
 import com.oriental.coach.utils.Utils;
 
@@ -29,7 +30,7 @@ import butterknife.OnClick;
  * @Describe 日程安排
  */
 
-public class DailyPlanActivity extends Activity {
+public class DailyPlanActivity extends BaseActivity {
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
     @Bind(R.id.rb_daily_plan_day_1)

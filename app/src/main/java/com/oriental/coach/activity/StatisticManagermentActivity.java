@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.Constants;
 import com.oriental.coach.R;
+import com.oriental.coach.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ import butterknife.OnClick;
  * @Describe 统计管理
  */
 
-public class StatisticManagermentActivity extends Activity {
+public class StatisticManagermentActivity extends BaseActivity {
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
     @Bind(R.id.tv_statistic_daily_number)

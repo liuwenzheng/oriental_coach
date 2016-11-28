@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.OrderMessageAdapter;
+import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.OrderMessage;
 import com.oriental.coach.utils.Utils;
 
@@ -29,7 +30,7 @@ import butterknife.OnClick;
  * @Describe 登录
  */
 
-public class OrderMessageActivity extends Activity {
+public class OrderMessageActivity extends BaseActivity {
 
 
     @Bind(R.id.tv_header_title)

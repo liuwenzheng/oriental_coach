@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.CarTypeAdapter;
+import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.CarType;
 import com.oriental.coach.entity.InsuranceRecord;
 
@@ -26,7 +27,7 @@ import butterknife.OnClick;
  * @Describe 车型
  */
 
-public class CarTypeActivity extends Activity implements CarTypeAdapter.CarTypeClickListener {
+public class CarTypeActivity extends BaseActivity implements CarTypeAdapter.CarTypeClickListener {
 
 
     @Bind(R.id.tv_header_title)

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.StudentManagermentAdapter;
+import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.Student;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * @Describe 学生管理
  */
 
-public class StudentManagermentActivity extends Activity {
+public class StudentManagermentActivity extends BaseActivity {
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
 //    @Bind(R.id.sg_student_header)
