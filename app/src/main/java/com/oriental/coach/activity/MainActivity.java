@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
+import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.fragment.MainCoachFragment;
 import com.oriental.coach.fragment.MainMyFragment;
 
@@ -20,8 +21,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.fl_fragment_container)
-    FrameLayout mainFragment;
     FragmentManager mFragmentManager;
     Fragment mMainCoachFrament;
     Fragment mMainMyFragment;
@@ -30,6 +29,7 @@ public class MainActivity extends BaseActivity {
     Button btnMainHome;
     @Bind(R.id.btn_main_my)
     Button btnMainMy;
+    private Bundle mDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (savedInstanceState != null) {
+            return;
+        }
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            Teacher teacher = getIntent().getParcelableExtra("teacher");
+            mDatas = new Bundle();
+            mDatas.putParcelable("teacher", teacher);
+        } else {
+            finish();
             return;
         }
         mFragmentManager = getSupportFragmentManager();
@@ -83,7 +91,9 @@ public class MainActivity extends BaseActivity {
 
     private void initFragment() {
         mMainCoachFrament = new MainCoachFragment();
+        mMainCoachFrament.setArguments(mDatas);
         mMainMyFragment = new MainMyFragment();
+        mMainMyFragment.setArguments(mDatas);
     }
 
     @OnClick(R.id.btn_main_home)

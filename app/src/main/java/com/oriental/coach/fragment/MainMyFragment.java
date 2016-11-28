@@ -3,6 +3,7 @@ package com.oriental.coach.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.oriental.coach.R;
 import com.oriental.coach.activity.CarTypeActivity;
 import com.oriental.coach.activity.OrderMessageActivity;
 import com.oriental.coach.activity.SettingActivity;
+import com.oriental.coach.entity.Teacher;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,12 +54,18 @@ public class MainMyFragment extends Fragment {
     TextView tv_my_training_subject;
 
     private PopupWindow mSharePopupWindow;
+    private Teacher mTeacher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_my, null);
         ButterKnife.bind(this, view);
+        // 从activity传过来的Bundle
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            mTeacher = bundle.getParcelable("teacher");
+        }
         return view;
     }
 
@@ -65,6 +73,49 @@ public class MainMyFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        initView();
+    }
+
+    private void initView() {
+        if (mTeacher != null) {
+            tv_my_name.setText(mTeacher.name);
+            tv_my_gender.setText("1".equals(mTeacher.gender) ? "女" : "男");
+            tv_my_phonenumber.setText(getString(R.string.phonenumber, mTeacher.phoneNo));
+            if (mTeacher.goodCommPro > 0 && mTeacher.goodCommPro <= 20) {
+                rb_my_rating.setRating(1);
+            } else if (mTeacher.goodCommPro > 20 && mTeacher.goodCommPro <= 40) {
+                rb_my_rating.setRating(2);
+            } else if (mTeacher.goodCommPro > 40 && mTeacher.goodCommPro <= 60) {
+                rb_my_rating.setRating(3);
+            } else if (mTeacher.goodCommPro > 60 && mTeacher.goodCommPro <= 80) {
+                rb_my_rating.setRating(4);
+            } else if (mTeacher.goodCommPro > 80 && mTeacher.goodCommPro <= 100) {
+                rb_my_rating.setRating(5);
+            } else {
+                rb_my_rating.setRating(0);
+            }
+            tv_my_driving_years.setText(mTeacher.carAge + "");
+            tv_my_student_total.setText(mTeacher.studentCnt + "");
+            tv_my_feedback_rate.setText(mTeacher.goodCommPro + "");
+            if (TextUtils.isEmpty(mTeacher.courseType)) {
+                String[] s = mTeacher.courseType.split(",");
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < s.length; i++) {
+                    if ("1".equals(s[i])) {
+                        builder.append("科目二普通");
+                    } else if ("2".equals(s[i])) {
+                        builder.append("科目二场内");
+                    } else if ("2".equals(s[i])) {
+                        builder.append("科目三");
+                    }
+                    if (i < s.length - 1) {
+                        builder.append("、");
+                    }
+                }
+                tv_my_training_subject.setText(builder.toString());
+            }
+            tv_my_training_field.setText(mTeacher.address);
+        }
     }
 
     @Override

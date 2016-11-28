@@ -12,6 +12,7 @@
         android:background="@color/blue_4c6f98">
 
         <TextView
+            android:id="@+id/tv_coach_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -78,14 +79,6 @@
                 android:textColor="@color/white_ffffff"
                 android:textSize="16sp" />
         </LinearLayout>
-
-        <com.zcw.togglebutton.ToggleButton
-            android:id="@+id/tb_switch"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -8,32 +8,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.activity.DailyPlanActivity;
 import com.oriental.coach.activity.OrderManagermentActivity;
 import com.oriental.coach.activity.StatisticManagermentActivity;
 import com.oriental.coach.activity.StudentManagermentActivity;
+import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.utils.LogModule;
-import com.zcw.togglebutton.ToggleButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainCoachFragment extends Fragment {
     public static final String TAG = MainCoachFragment.class.getSimpleName();
-    @Bind(R.id.fl_student)
-    FrameLayout fl_tab1;
-    @Bind(R.id.fl_daily)
-    FrameLayout fl_tab2;
-    @Bind(R.id.fl_orders)
-    FrameLayout fl_tab3;
-    @Bind(R.id.fl_statistic)
-    FrameLayout fl_statistic;
-    @Bind(R.id.tb_switch)
-    ToggleButton tb_switch;
+    @Bind(R.id.civ_my_header)
+    CircleImageView civMyHeader;
+    @Bind(R.id.tv_my_name)
+    TextView tvMyName;
+    @Bind(R.id.tv_coach_driving_years)
+    TextView tvCoachDrivingYears;
+    @Bind(R.id.tv_coach_school)
+    TextView tvCoachSchool;
+    @Bind(R.id.tv_coach_title)
+    TextView tv_coach_title;
+
+    private Teacher mTeacher;
+
 
     @Override
     public void onAttach(Context context) {
@@ -53,6 +57,11 @@ public class MainCoachFragment extends Fragment {
         LogModule.i(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.fragment_main_coach, null);
         ButterKnife.bind(this, view);
+        // 从activity传过来的Bundle
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            mTeacher = bundle.getParcelable("teacher");
+        }
         return view;
     }
 
@@ -61,13 +70,15 @@ public class MainCoachFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LogModule.i(TAG, "onViewCreated");
         ButterKnife.bind(this, view);
-        tb_switch.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
-            @Override
-            public void onToggle(boolean on) {
-                LogModule.i("toggle:" + on);
-            }
-        });
+        initView();
+    }
 
+    private void initView() {
+        if (mTeacher != null) {
+            tvMyName.setText(mTeacher.name);
+            tvCoachSchool.setText(mTeacher.school);
+            tvCoachDrivingYears.setText(getString(R.string.driving_years, String.valueOf(mTeacher.carAge)));
+        }
     }
 
     @Override
