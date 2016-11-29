@@ -1,6 +1,7 @@
 package com.oriental.coach.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -13,16 +14,21 @@ import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.BitmapCallback;
 import com.oriental.coach.R;
 import com.oriental.coach.activity.CarTypeActivity;
 import com.oriental.coach.activity.OrderMessageActivity;
 import com.oriental.coach.activity.SettingActivity;
 import com.oriental.coach.entity.Teacher;
+import com.oriental.coach.net.urls.Urls;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Response;
 
 
 public class MainMyFragment extends Fragment {
@@ -115,6 +121,14 @@ public class MainMyFragment extends Fragment {
                 tv_my_training_subject.setText(builder.toString());
             }
             tv_my_training_field.setText(mTeacher.address);
+            if (!TextUtils.isEmpty(mTeacher.logo)) {
+                OkGo.get(Urls.SERVER_IMAGE + mTeacher.logo).tag(getActivity()).execute(new BitmapCallback() {
+                    @Override
+                    public void onSuccess(Bitmap bitmap, Call call, Response response) {
+                        civ_my_header.setImageBitmap(bitmap);
+                    }
+                });
+            }
         }
     }
 

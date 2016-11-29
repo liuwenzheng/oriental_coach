@@ -3,6 +3,11 @@ package com.oriental.coach;
 import android.app.Application;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpHeaders;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.logging.Level;
 
@@ -23,11 +28,25 @@ public class Globals extends Application {
                     // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
                     // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
                     .debug("OkGo", Level.INFO, true)
+                    .addCommonHeaders(new HttpHeaders("Connection", "close"))
                     .setConnectTimeout(10000L)  //全局的连接超时时间
                     .setReadTimeOut(10000L)     //全局的读取超时时间
                     .setWriteTimeOut(10000L);   //全局的写入超时时间
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // imageloader默认全局配置项
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageForEmptyUri(R.drawable.default_image)
+                .showImageOnLoading(R.drawable.default_image)
+                .showImageOnFail(R.drawable.default_image)
+                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 }

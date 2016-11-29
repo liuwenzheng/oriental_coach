@@ -2,26 +2,34 @@ package com.oriental.coach.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.BitmapCallback;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.activity.DailyPlanActivity;
 import com.oriental.coach.activity.OrderManagermentActivity;
 import com.oriental.coach.activity.StatisticManagermentActivity;
 import com.oriental.coach.activity.StudentManagermentActivity;
 import com.oriental.coach.entity.Teacher;
+import com.oriental.coach.net.urls.Urls;
 import com.oriental.coach.utils.LogModule;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class MainCoachFragment extends Fragment {
     public static final String TAG = MainCoachFragment.class.getSimpleName();
@@ -78,6 +86,10 @@ public class MainCoachFragment extends Fragment {
             tvMyName.setText(mTeacher.name);
             tvCoachSchool.setText(mTeacher.school);
             tvCoachDrivingYears.setText(getString(R.string.driving_years, String.valueOf(mTeacher.carAge)));
+            if (!TextUtils.isEmpty(mTeacher.logo)) {
+                ImageLoader loader = ImageLoader.getInstance();
+                loader.
+            }
         }
     }
 

@@ -88,7 +88,11 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                ToastUtils.showToast(LoginActivity.this, e.getMessage());
+                if (e instanceof IllegalStateException) {
+                    ToastUtils.showToast(LoginActivity.this, e.getMessage());
+                } else {
+                    ToastUtils.showToast(LoginActivity.this, "网络错误");
+                }
             }
         });
     }
