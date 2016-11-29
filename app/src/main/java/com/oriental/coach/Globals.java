@@ -1,6 +1,7 @@
 package com.oriental.coach;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpHeaders;
@@ -9,6 +10,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -35,14 +38,19 @@ public class Globals extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //  java.io.EOFException
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Connection", "close");
         // imageloader默认全局配置项
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
+                .extraForDownloader(headers)
                 .showImageForEmptyUri(R.drawable.default_image)
                 .showImageOnLoading(R.drawable.default_image)
                 .showImageOnFail(R.drawable.default_image)
                 .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+                .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .defaultDisplayImageOptions(defaultOptions)

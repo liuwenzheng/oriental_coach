@@ -12,12 +12,14 @@ import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.net.callback.DialogCallback;
 import com.oriental.coach.net.resp.BaseResponse;
+import com.oriental.coach.net.resp.CarResult;
 import com.oriental.coach.net.resp.LoginResult;
 import com.oriental.coach.net.resp.TeacherResult;
 import com.oriental.coach.net.urls.Urls;
 import com.oriental.coach.utils.ToastUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -96,7 +98,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
+    private Teacher mTeacher;
     private void requestTeacher(final String tableId) {
         Map<String, String> req = new HashMap<>();
         req.put("teacharId", tableId);
@@ -104,21 +106,40 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(BaseResponse<TeacherResult> teacherResult, Call call, Response response) {
                 TeacherResult result = teacherResult.resObject;
-                Teacher teacher = new Teacher();
-                teacher.name = result.teacharName;
-                teacher.carAge = result.teacharCarAge;
-                teacher.school = result.schoolId;
-                teacher.courseType = result.courseType;
-                teacher.gender = result.teacharSex;
-                teacher.goodCommPro = result.goodCommPro;
-                teacher.logo = result.teacharLogo;
-                teacher.phoneNo = result.teacharPhone;
-                teacher.studentCnt = result.studentCnt;
+                mTeacher = new Teacher();
+                mTeacher.name = result.teacharName;
+                mTeacher.carAge = result.teacharCarAge;
+                mTeacher.school = result.schoolId;
+                mTeacher.courseType = result.courseType;
+                mTeacher.gender = result.teacharSex;
+                mTeacher.goodCommPro = result.goodCommPro;
+                mTeacher.logo = result.teacharLogo;
+                mTeacher.phoneNo = result.teacharPhone;
+                mTeacher.studentCnt = result.studentCnt;
                 StringBuilder builder = new StringBuilder();
-                builder.append(result.proviceName).append(result.citeName).append(result.countyName).append(result.areaName);
-                teacher.address = builder.toString();
+                builder.append(result.proviceName)
+                        .append(result.citeName)
+                        .append(result.countyName)
+                        .append(result.areaName)
+                        .append(result.addressDetail);
+                mTeacher.address = builder.toString();
+                requestCar(tableId);
+
+
+            }
+        });
+    }
+
+    private void requestCar(String tableId) {
+        Map<String, String> req = new HashMap<>();
+        req.put("teacharId", tableId);
+        requestGet(Urls.GET_TEACHER_CAR, req, new DialogCallback<BaseResponse<List<CarResult>>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List<CarResult>> carResult, Call call, Response response) {
+                List<CarResult> results = carResult.resObject;
+                mTeacher.carResults = results;
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("teacher", teacher);
+                intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 finish();
             }

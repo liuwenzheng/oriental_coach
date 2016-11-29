@@ -1,7 +1,6 @@
 package com.oriental.coach.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -14,8 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.BitmapCallback;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.activity.CarTypeActivity;
 import com.oriental.coach.activity.OrderMessageActivity;
@@ -27,8 +25,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Call;
-import okhttp3.Response;
 
 
 public class MainMyFragment extends Fragment {
@@ -103,7 +99,7 @@ public class MainMyFragment extends Fragment {
             tv_my_driving_years.setText(mTeacher.carAge + "");
             tv_my_student_total.setText(mTeacher.studentCnt + "");
             tv_my_feedback_rate.setText(mTeacher.goodCommPro + "");
-            if (TextUtils.isEmpty(mTeacher.courseType)) {
+            if (!TextUtils.isEmpty(mTeacher.courseType)) {
                 String[] s = mTeacher.courseType.split(",");
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < s.length; i++) {
@@ -111,7 +107,7 @@ public class MainMyFragment extends Fragment {
                         builder.append("科目二普通");
                     } else if ("2".equals(s[i])) {
                         builder.append("科目二场内");
-                    } else if ("2".equals(s[i])) {
+                    } else if ("3".equals(s[i])) {
                         builder.append("科目三");
                     }
                     if (i < s.length - 1) {
@@ -122,12 +118,10 @@ public class MainMyFragment extends Fragment {
             }
             tv_my_training_field.setText(mTeacher.address);
             if (!TextUtils.isEmpty(mTeacher.logo)) {
-                OkGo.get(Urls.SERVER_IMAGE + mTeacher.logo).tag(getActivity()).execute(new BitmapCallback() {
-                    @Override
-                    public void onSuccess(Bitmap bitmap, Call call, Response response) {
-                        civ_my_header.setImageBitmap(bitmap);
-                    }
-                });
+                ImageLoader.getInstance().displayImage(Urls.SERVER_IMAGE + mTeacher.logo, civ_my_header);
+            }
+            if (mTeacher.carResults != null && !mTeacher.carResults.isEmpty()) {
+                tv_my_car_type.setText(mTeacher.carResults.get(0).carName);
             }
         }
     }
@@ -144,6 +138,7 @@ public class MainMyFragment extends Fragment {
         switch (view.getId()) {
             case R.id.ll_my_car_type:
                 intent = new Intent(getActivity(), CarTypeActivity.class);
+                intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 break;
             case R.id.ll_my_order_message:

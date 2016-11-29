@@ -3,6 +3,11 @@ package com.oriental.coach.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.oriental.coach.net.resp.CarResult;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author lwz
  * @Date 2016/11/28 0028
@@ -30,6 +35,8 @@ public class Teacher implements Parcelable {
     public String courseType;
     // 教练地址
     public String address;
+    // 教练用车
+    public List<CarResult> carResults;
 
 
     @Override
@@ -49,6 +56,7 @@ public class Teacher implements Parcelable {
         dest.writeDouble(this.goodCommPro);
         dest.writeString(this.courseType);
         dest.writeString(this.address);
+        dest.writeList(this.carResults);
     }
 
     public Teacher() {
@@ -65,6 +73,8 @@ public class Teacher implements Parcelable {
         this.goodCommPro = in.readDouble();
         this.courseType = in.readString();
         this.address = in.readString();
+        this.carResults = new ArrayList<CarResult>();
+        in.readList(this.carResults, CarResult.class.getClassLoader());
     }
 
     public static final Creator<Teacher> CREATOR = new Creator<Teacher>() {

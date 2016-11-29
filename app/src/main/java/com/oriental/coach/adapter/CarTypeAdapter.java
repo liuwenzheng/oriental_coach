@@ -2,6 +2,7 @@ package com.oriental.coach.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.entity.CarType;
 
@@ -49,24 +51,30 @@ public class CarTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void initializeItemView(MyViewHolder holder, final CarType carType, int position) {
         holder.tvCarTypeName.setText(carType.name);
         holder.tvCarTypeNumber.setText(carType.number);
-        holder.tvInsuranceRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.insuranceRecordClick(carType);
-            }
-        });
-        holder.tvExamineRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.insuranceRecordClick(carType);
-            }
-        });
-        holder.tvMaintenanceRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.insuranceRecordClick(carType);
-            }
-        });
+        if (!TextUtils.isEmpty(carType.url)) {
+            ImageLoader.getInstance().displayImage(carType.url, holder.ivCarPic);
+        }
+        if (carType.insuranceRecords != null && !carType.insuranceRecords.isEmpty()) {
+            holder.tvInsuranceRecord.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.insuranceRecordClick(carType);
+                }
+            });
+            holder.tvExamineRecord.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.insuranceRecordClick(carType);
+                }
+            });
+            holder.tvMaintenanceRecord.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.insuranceRecordClick(carType);
+                }
+            });
+        }
+
     }
 
     @Override
