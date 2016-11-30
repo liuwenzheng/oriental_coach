@@ -109,7 +109,7 @@ public class LoginActivity extends BaseActivity {
                 mTeacher = new Teacher();
                 mTeacher.name = result.teacharName;
                 mTeacher.carAge = result.teacharCarAge;
-                mTeacher.school = result.schoolId;
+                mTeacher.school = result.schoolName;
                 mTeacher.courseType = result.courseType;
                 mTeacher.gender = result.teacharSex;
                 mTeacher.goodCommPro = result.goodCommPro;
