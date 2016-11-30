@@ -16,4 +16,6 @@ public class Student {
     public String identityCard;
     // 头像url
     public String headerUrl;
+    // 科目
+    public String subject;
 }

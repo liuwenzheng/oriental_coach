@@ -12,6 +12,6 @@ public class Urls {
     public static final String GET_TEACHER = SERVER + "driversApp/driversTeacher/getTeacher.do";
     public static final String GET_TEACHER_CAR = SERVER + "driversApp/driversCar/initTeacherCar.do";
     public static final String GET_BESPEAK = SERVER + "driversApp/driversStudentBespeak/initBespeakList.do";
-    public static final String GET_STUDENT = SERVER + "driversApp/driversStudent/selectStudentById.do";
+    public static final String GET_STUDENT = SERVER + "driversApp/driversTeacher/selectSudentList.do";
     public static final String GET_APPOINTMENT = SERVER + "driversApp/driversTeacherTime/selectOneDayTime.do";
 }

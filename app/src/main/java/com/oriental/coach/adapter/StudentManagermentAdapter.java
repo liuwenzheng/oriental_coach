@@ -2,6 +2,7 @@ package com.oriental.coach.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.entity.Student;
 
@@ -47,7 +49,7 @@ public class StudentManagermentAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void initializeItemView(MyViewHolder holder, Student student, int position) {
         holder.tvName.setText(student.name);
-        if (student.gender == 0) {
+        if (student.gender == 1) {
             holder.tvGender.setText("男");
             holder.ivGender.setImageResource(R.drawable.gender_male);
         } else {
@@ -56,6 +58,10 @@ public class StudentManagermentAdapter extends RecyclerView.Adapter<RecyclerView
         }
         holder.tvPhonenumber.setText(mContext.getString(R.string.phonenumber, student.phonenumber));
         holder.tvIdentityCard.setText(mContext.getString(R.string.identity_card, student.identityCard));
+        holder.tv_course_type.setText(student.subject);
+        if (!TextUtils.isEmpty(student.headerUrl)) {
+            ImageLoader.getInstance().displayImage(student.headerUrl, holder.ciHeader);
+        }
     }
 
     @Override
@@ -76,6 +82,8 @@ public class StudentManagermentAdapter extends RecyclerView.Adapter<RecyclerView
         TextView tvPhonenumber;
         @Bind(R.id.tv_identity_card)
         TextView tvIdentityCard;
+        @Bind(R.id.tv_course_type)
+        TextView tv_course_type;
         @Bind(R.id.ll_parent)
         RelativeLayout llParent;
 

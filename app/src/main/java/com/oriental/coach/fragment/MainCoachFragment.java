@@ -134,6 +134,7 @@ public class MainCoachFragment extends Fragment {
         switch (view.getId()) {
             case R.id.fl_student:
                 intent = new Intent(getActivity(), StudentManagermentActivity.class);
+                intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 break;
             case R.id.fl_daily:
