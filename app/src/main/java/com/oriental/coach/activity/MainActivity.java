@@ -6,14 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.fragment.MainCoachFragment;
 import com.oriental.coach.fragment.MainMyFragment;
+import com.oriental.coach.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -107,4 +108,24 @@ public class MainActivity extends BaseActivity {
         switchFragement(mMainMyFragment, mFragmentManager.beginTransaction());
     }
 
+    private long firstTime = 0;
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime > 2000) {
+                    //如果两次按键时间间隔大于2秒，则不退出
+                    ToastUtils.showToast(this, "再按一次退出程序");
+                    firstTime = secondTime;//更新firstTime
+                    return true;
+                } else {
+                    //两次按键小于2秒时，退出应用
+                    finish();
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }

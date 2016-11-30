@@ -116,6 +116,7 @@ public class LoginActivity extends BaseActivity {
                 mTeacher.logo = result.teacharLogo;
                 mTeacher.phoneNo = result.teacharPhone;
                 mTeacher.studentCnt = result.studentCnt;
+                mTeacher.teacharId = tableId;
                 StringBuilder builder = new StringBuilder();
                 builder.append(result.proviceName)
                         .append(result.citeName)

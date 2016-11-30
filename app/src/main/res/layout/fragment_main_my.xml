@@ -211,44 +211,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:drawableLeft="@drawable/my_signature"
-                        android:drawablePadding="5dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/my_signature"
-                        android:textColor="@color/grey_999999"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <View style="@style/divider_line_dedede" />
-
-                <TextView
-                    android:id="@+id/tv_my_signature"
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-                    android:layout_marginLeft="25dp"
-                    android:gravity="center_vertical"
-                    android:text="I WAND YOU"
-                    android:textColor="@color/black_424242"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white_ffffff"
-                android:orientation="vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/my_training_field"
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical"

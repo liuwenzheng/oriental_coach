@@ -37,6 +37,8 @@ public class Teacher implements Parcelable {
     public String address;
     // 教练用车
     public List<CarResult> carResults;
+    // 教练id
+    public String teacharId;
 
 
     @Override
@@ -56,7 +58,8 @@ public class Teacher implements Parcelable {
         dest.writeDouble(this.goodCommPro);
         dest.writeString(this.courseType);
         dest.writeString(this.address);
-        dest.writeList(this.carResults);
+        dest.writeTypedList(this.carResults);
+        dest.writeString(this.teacharId);
     }
 
     public Teacher() {
@@ -73,8 +76,8 @@ public class Teacher implements Parcelable {
         this.goodCommPro = in.readDouble();
         this.courseType = in.readString();
         this.address = in.readString();
-        this.carResults = new ArrayList<CarResult>();
-        in.readList(this.carResults, CarResult.class.getClassLoader());
+        this.carResults = in.createTypedArrayList(CarResult.CREATOR);
+        this.teacharId = in.readString();
     }
 
     public static final Creator<Teacher> CREATOR = new Creator<Teacher>() {

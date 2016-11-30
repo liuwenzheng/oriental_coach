@@ -138,6 +138,7 @@ public class MainCoachFragment extends Fragment {
                 break;
             case R.id.fl_daily:
                 intent = new Intent(getActivity(), DailyPlanActivity.class);
+                intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 break;
             case R.id.fl_orders:

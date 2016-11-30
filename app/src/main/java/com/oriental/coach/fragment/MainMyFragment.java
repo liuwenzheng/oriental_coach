@@ -46,8 +46,6 @@ public class MainMyFragment extends Fragment {
     TextView tv_my_student_total;
     @Bind(R.id.tv_my_feedback_rate)
     TextView tv_my_feedback_rate;
-    @Bind(R.id.tv_my_signature)
-    TextView tv_my_signature;
     @Bind(R.id.tv_my_training_field)
     TextView tv_my_training_field;
     @Bind(R.id.tv_my_car_type)
