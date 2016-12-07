@@ -1,6 +1,5 @@
 package com.oriental.coach.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +13,25 @@ import com.oriental.coach.R;
 import com.oriental.coach.adapter.OrderManagermentAdapter;
 import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.OrderEntity;
+import com.oriental.coach.entity.Teacher;
+import com.oriental.coach.net.callback.DialogCallback;
+import com.oriental.coach.net.resp.BaseResponse;
+import com.oriental.coach.net.resp.BespeakResult;
+import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.ToastUtils;
 import com.oriental.coach.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * @Author lwz
@@ -45,6 +54,10 @@ public class OrderManagermentActivity extends BaseActivity {
     RecyclerView rvList;
     private List<OrderEntity> mEntities;
     private OrderManagermentAdapter mAdapter;
+    private Teacher mTeacher;
+    public static final String STATE_BESPEAK_FINISHED = "2_0";
+    public static final String STATE_BESPEAK_CANCEL = "2";
+    public static final String STATE_BESPEAK_UNFINISHED = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +68,15 @@ public class OrderManagermentActivity extends BaseActivity {
         rgOrderManagerment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                createDatas(Integer.parseInt((String) group.findViewById(checkedId).getTag()));
+                createDatas((String) group.findViewById(checkedId).getTag());
             }
         });
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            mTeacher = getIntent().getParcelableExtra("teacher");
+        } else {
+            finish();
+            return;
+        }
         mEntities = new ArrayList<>();
         mAdapter = new OrderManagermentAdapter(this, mEntities);
         rvList.setLayoutManager(new LinearLayoutManager(this));
@@ -65,28 +84,79 @@ public class OrderManagermentActivity extends BaseActivity {
         rbOrderManagermentFinished.setChecked(true);
     }
 
-    private void createDatas(int status) {
+    private void createDatas(String status) {
         mEntities.clear();
-        for (int i = 0; i < 20; i++) {
-            OrderEntity entity = new OrderEntity();
-            entity.name = "测试" + i;
-            if (OrderManagermentAdapter.ORDER_STATUS_UNFINISHED == status) {
-                entity.surplusTime = "1天12小时32分钟";
-            } else {
-                entity.surplusTime = "";
+        Map<String, String> map = new HashMap<>();
+        map.put("teacharId", mTeacher.teacharId);
+        map.put("bespeakState", status);
+        requestGet(Urls.GET_BESPEAK, map, new DialogCallback<BaseResponse<List<BespeakResult>>>(this) {
+
+            @Override
+            public void onSuccess(BaseResponse<List<BespeakResult>> listBaseResponse, Call call, Response response) {
+                List<BespeakResult> results = listBaseResponse.resObject;
+                if (results != null && !results.isEmpty()) {
+                    for (int i = 0; i < results.size(); i++) {
+                        BespeakResult result = results.get(i);
+                        OrderEntity entity = new OrderEntity();
+                        entity.name = result.studentName;
+                        if (STATE_BESPEAK_UNFINISHED.equals(result.bespeakState)) {
+                            // 未完成订单，计算时间
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(result.timeDate);
+                            String timeDay = Utils.calendar2strDate(calendar, Constants.PATTERN_YYYY_MM_DD);
+                            String timeMinute = String.format("%s %s", timeDay, result.timeBeginTime);
+                            calendar = Utils.strDate2Calendar(timeMinute, Constants.PATTERN_YYYY_MM_DD_HH_MM);
+
+                            if (Utils.compareDate(calendar.getTime(), Calendar.getInstance().getTime()) != 1) {
+                                entity.surplusTime = "0天0小时0分钟";
+                            } else {
+                                int time = Utils.getIntervalMin(Utils.calendar2strDate(Calendar.getInstance(), Constants.PATTERN_YYYY_MM_DD_HH_MM),
+                                        timeMinute,
+                                        Constants.PATTERN_YYYY_MM_DD_HH_MM);
+                                int day = time / 60 / 24;
+                                int hour = time / 60 % 24;
+                                int min = time % 60;
+                                entity.surplusTime = String.format("%s天%s小时%s分钟", day, hour, min);
+                            }
+                        }
+                        entity.orderStatus = result.bespeakState;
+                        String subject;
+                        if ("1".equals(result.timeSourse)) {
+                            subject = "科目二普通";
+                        } else if ("2".equals(result.timeSourse)) {
+                            subject = "科目二场地";
+                        } else {
+                            subject = "科目三";
+                        }
+                        entity.subject = subject;
+                        entity.phonenumber = result.studentPhone;
+                        entity.headerUrl = result.studentLogo;
+                        entity.price = result.bespeakSumMoney;
+                        entity.payType = "支付宝";
+                        Calendar addTime = Calendar.getInstance();
+                        addTime.setTime(result.bespeakAddtime);
+                        entity.createTime = Utils.calendar2strDate(addTime, Constants.PATTERN_YYYY_MM_DD_HH_MM);
+                        entity.orderNumber = result.bespeakCode;
+                        Calendar courseTime = Calendar.getInstance();
+                        courseTime.setTime(result.timeDate);
+                        entity.courseTime = String.format("%s %s-%s", Utils.calendar2strDate(courseTime, Constants.PATTERN_YYYY_MM_DD), result.timeBeginTime, result.timeEndTime);
+                        mEntities.add(entity);
+                    }
+                    mAdapter.setEntities(mEntities);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
-            entity.orderStatus = status;
-            entity.subject = "科目三";
-            entity.phonenumber = "13200293821";
-            entity.price = "130.0";
-            entity.payType = "支付宝";
-            entity.createTime = Utils.calendar2strDate(Calendar.getInstance(), Constants.PATTERN_YYYY_MM_DD_HH_MM);
-            entity.orderNumber = "123456789";
-            entity.courseTime = "2016-09-13 07:00-18:00";
-            mEntities.add(entity);
-        }
-        mAdapter.setEntities(mEntities);
-        mAdapter.notifyDataSetChanged();
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (e instanceof IllegalStateException) {
+                    ToastUtils.showToast(OrderManagermentActivity.this, e.getMessage());
+                }
+                mAdapter.setEntities(mEntities);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 

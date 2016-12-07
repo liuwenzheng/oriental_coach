@@ -17,7 +17,7 @@ public class OrderEntity {
     // 电话
     public String phonenumber;
     // 价格
-    public String price;
+    public double price;
     // 支付类型
     public String payType;
     // 创建时间
@@ -27,5 +27,5 @@ public class OrderEntity {
     // 课程时间
     public String courseTime;
     // 订单状态
-    public int orderStatus;
+    public String orderStatus;
 }

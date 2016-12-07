@@ -2,6 +2,7 @@ package com.oriental.coach.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
+import com.oriental.coach.activity.OrderManagermentActivity;
 import com.oriental.coach.entity.OrderEntity;
+import com.oriental.coach.net.urls.Urls;
 
 import java.util.List;
 
@@ -20,10 +24,6 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final int ORDER_STATUS_FINISHED = 0;
-    public static final int ORDER_STATUS_CANCEL = 1;
-    public static final int ORDER_STATUS_UNFINISHED = 2;
-
     private Context mContext;
 
     public void setEntities(List<OrderEntity> mEntities) {
@@ -49,17 +49,17 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void initializeItemView(MyViewHolder holder, OrderEntity entity, int position) {
-        if (ORDER_STATUS_FINISHED == entity.orderStatus) {
+        if (OrderManagermentActivity.STATE_BESPEAK_FINISHED.equals(entity.orderStatus)) {
             holder.ivOrderStatus.setVisibility(View.VISIBLE);
             holder.ivOrderStatus.setImageResource(R.drawable.order_finished_icon);
             holder.rlSurplusTime.setVisibility(View.GONE);
         }
-        if (ORDER_STATUS_CANCEL == entity.orderStatus) {
+        if (OrderManagermentActivity.STATE_BESPEAK_CANCEL.equals(entity.orderStatus)) {
             holder.ivOrderStatus.setVisibility(View.VISIBLE);
             holder.ivOrderStatus.setImageResource(R.drawable.order_cancel_icon);
             holder.rlSurplusTime.setVisibility(View.GONE);
         }
-        if (ORDER_STATUS_UNFINISHED == entity.orderStatus) {
+        if (OrderManagermentActivity.STATE_BESPEAK_UNFINISHED.equals(entity.orderStatus)) {
             holder.ivOrderStatus.setVisibility(View.GONE);
             holder.rlSurplusTime.setVisibility(View.VISIBLE);
             holder.tvSurplusTime.setText(entity.surplusTime);
@@ -67,11 +67,15 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.tvName.setText(entity.name);
         holder.tvSubject.setText(entity.subject);
         holder.tvPhonenumber.setText(mContext.getString(R.string.phonenumber, entity.phonenumber));
-        holder.tvPrice.setText(mContext.getString(R.string.price, entity.price));
+        holder.tvPrice.setText(mContext.getString(R.string.price, String.valueOf(entity.price)));
         holder.tvPayType.setText(mContext.getString(R.string.pay_type, entity.payType));
         holder.tvCreateTime.setText(entity.createTime);
         holder.tvOrderNumber.setText(entity.orderNumber);
         holder.tvCourseTime.setText(entity.courseTime);
+        if (!TextUtils.isEmpty(entity.headerUrl)) {
+            ImageLoader.getInstance().displayImage(Urls.SERVER_IMAGE + entity.headerUrl, holder.ciHeader);
+
+        }
     }
 
     @Override

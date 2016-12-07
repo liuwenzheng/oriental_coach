@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,6 +33,8 @@ public class Globals extends Application {
                     // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
                     .debug("OkGo", Level.INFO, true)
                     .addCommonHeaders(new HttpHeaders("Connection", "close"))
+                    // cookie使用内存缓存（app退出后，cookie消失）
+                    .setCookieStore(new MemoryCookieStore())
                     .setConnectTimeout(10000L)  //全局的连接超时时间
                     .setReadTimeOut(10000L)     //全局的读取超时时间
                     .setWriteTimeOut(10000L);   //全局的写入超时时间
