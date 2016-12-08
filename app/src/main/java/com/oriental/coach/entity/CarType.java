@@ -8,12 +8,12 @@ import java.util.List;
  * @Describe 车型
  */
 public class CarType {
+    // id
+    public String carId;
     // 图片
     public String url;
     // 车名
     public String name;
     // 车牌号
     public String number;
-    // 保险记录
-    public List<InsuranceRecord> insuranceRecords;
 }

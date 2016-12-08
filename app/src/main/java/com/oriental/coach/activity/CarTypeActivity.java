@@ -8,21 +8,32 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.CarTypeAdapter;
 import com.oriental.coach.base.BaseActivity;
+import com.oriental.coach.entity.CarRecord;
 import com.oriental.coach.entity.CarType;
-import com.oriental.coach.entity.InsuranceRecord;
 import com.oriental.coach.entity.Teacher;
+import com.oriental.coach.net.callback.DialogCallback;
+import com.oriental.coach.net.resp.BaseResponse;
+import com.oriental.coach.net.resp.CarRecordResult;
 import com.oriental.coach.net.resp.CarResult;
 import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.ToastUtils;
+import com.oriental.coach.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * @Author lwz
@@ -31,7 +42,10 @@ import butterknife.OnClick;
  */
 
 public class CarTypeActivity extends BaseActivity implements CarTypeAdapter.CarTypeClickListener {
-
+    public static final String CAR_RECORD_TYPE_INSURANCE = "3";
+    public static final String CAR_RECORD_TYPE_EXAMINE = "1";
+    public static final String CAR_RECORD_TYPE_MAINTENANCE = "2";
+    public static final String CAR_RECORD_TYPE_MAINTENANCE_TWICE = "4";
 
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
@@ -53,6 +67,7 @@ public class CarTypeActivity extends BaseActivity implements CarTypeAdapter.CarT
             if (!mTeacher.carResults.isEmpty()) {
                 for (CarResult result : mTeacher.carResults) {
                     CarType carType = new CarType();
+                    carType.carId = result.carId;
                     carType.name = result.carName;
                     carType.number = result.carCode;
                     if (!TextUtils.isEmpty(result.carLogo)) {
@@ -67,29 +82,6 @@ public class CarTypeActivity extends BaseActivity implements CarTypeAdapter.CarT
         rvList.setAdapter(mAdapter);
     }
 
-    private void createData() {
-        mEntities.clear();
-        for (int i = 0; i < 20; i++) {
-            CarType carType = new CarType();
-            carType.name = "雪弗兰";
-            carType.number = "晋121" + i;
-            List<InsuranceRecord> records = new ArrayList<>();
-            for (int j = 0; j < 10; j++) {
-                InsuranceRecord record = new InsuranceRecord();
-                record.company = "中国平安" + j;
-                record.price = "5000";
-                record.startDate = "2016-01-01";
-                record.endDate = "2018-01-01";
-                records.add(record);
-            }
-            carType.insuranceRecords = records;
-            mEntities.add(carType);
-        }
-        mAdapter.setDatas(mEntities);
-        mAdapter.notifyDataSetChanged();
-    }
-
-
     @OnClick({R.id.iv_header_back, R.id.tv_header_title})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -100,20 +92,61 @@ public class CarTypeActivity extends BaseActivity implements CarTypeAdapter.CarT
     }
 
     @Override
-    public void insuranceRecordClick(CarType carType) {
-        Intent intent = new Intent(this, InsuranceRecordActivity.class);
-        ArrayList<InsuranceRecord> records = new ArrayList<>(carType.insuranceRecords);
-        intent.putParcelableArrayListExtra(InsuranceRecordActivity.EXTRA_KEY_INSURANCE_RECORD, records);
-        startActivity(intent);
+    public void insuranceRecordClick(final CarType carType) {
+        getRecord(carType, CAR_RECORD_TYPE_INSURANCE);
     }
 
     @Override
-    public void examineRecordClick() {
-
+    public void examineRecordClick(CarType carType) {
+        getRecord(carType, CAR_RECORD_TYPE_EXAMINE);
     }
 
     @Override
-    public void maintenanceRecordClick() {
-
+    public void maintenanceRecordClick(CarType carType) {
+        getRecord(carType, CAR_RECORD_TYPE_MAINTENANCE);
     }
+
+    @Override
+    public void maintenanceTwiceRecordClick(CarType carType) {
+        getRecord(carType, CAR_RECORD_TYPE_MAINTENANCE_TWICE);
+    }
+
+    private void getRecord(CarType carType, final String type) {
+        Map<String, String> map = new HashMap<>();
+        map.put("carId", carType.carId);
+        map.put("recordType", type);
+        requestGet(Urls.GET_CARRECORD, map, new DialogCallback<BaseResponse<List<CarRecordResult>>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List<CarRecordResult>> listBaseResponse, Call call, Response response) {
+                List<CarRecordResult> results = listBaseResponse.resObject;
+                if (results != null && !results.isEmpty()) {
+                    ArrayList<CarRecord> records = new ArrayList<>();
+                    for (int i = 0; i < results.size(); i++) {
+                        CarRecordResult result = results.get(i);
+                        CarRecord record = new CarRecord();
+                        Calendar start = Calendar.getInstance();
+                        start.setTime(result.recordBeginTime);
+                        record.startDate = Utils.calendar2strDate(start, Constants.PATTERN_YYYY_MM_DD);
+                        Calendar end = Calendar.getInstance();
+                        end.setTime(result.recordEndTime);
+                        record.endDate = Utils.calendar2strDate(end, Constants.PATTERN_YYYY_MM_DD);
+                        records.add(record);
+                    }
+                    Intent intent = new Intent(CarTypeActivity.this, CarRecordActivity.class);
+                    intent.putParcelableArrayListExtra(CarRecordActivity.EXTRA_KEY_INSURANCE_RECORD, records);
+                    intent.putExtra("recordType", type);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (e instanceof IllegalStateException) {
+                    ToastUtils.showToast(CarTypeActivity.this, e.getMessage());
+                }
+            }
+        });
+    }
+
 }

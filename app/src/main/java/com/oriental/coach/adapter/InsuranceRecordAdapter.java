@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
-import com.oriental.coach.entity.InsuranceRecord;
+import com.oriental.coach.entity.CarRecord;
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ public class InsuranceRecordAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
     private Context mContext;
-    private List<InsuranceRecord> mEntities;
+    private List<CarRecord> mEntities;
 
-    public InsuranceRecordAdapter(Context context, List<InsuranceRecord> entities) {
+    public InsuranceRecordAdapter(Context context, List<CarRecord> entities) {
         this.mContext = context;
         this.mEntities = entities;
     }
 
-    public void setDatas(List<InsuranceRecord> entities) {
+    public void setDatas(List<CarRecord> entities) {
         this.mEntities = entities;
     }
 
@@ -41,9 +41,7 @@ public class InsuranceRecordAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         initializeItemView((MyViewHolder) holder, mEntities.get(position));
     }
 
-    private void initializeItemView(MyViewHolder holder, InsuranceRecord record) {
-        holder.tvCompany.setText(record.company);
-        holder.tvPrice.setText(record.price);
+    private void initializeItemView(MyViewHolder holder, CarRecord record) {
         holder.tvStartDate.setText(record.startDate);
         holder.tvEndDate.setText(record.endDate);
     }
@@ -54,10 +52,6 @@ public class InsuranceRecordAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_company)
-        TextView tvCompany;
-        @Bind(R.id.tv_price)
-        TextView tvPrice;
         @Bind(R.id.tv_start_date)
         TextView tvStartDate;
         @Bind(R.id.tv_end_date)

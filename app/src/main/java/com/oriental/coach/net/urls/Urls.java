@@ -16,4 +16,5 @@ public class Urls {
     public static final String GET_APPOINTMENT = SERVER + "driversApp/driversTeacherTime/selectOneDayTime.do";
     public static final String GET_MESSAGE = SERVER + "driversApp/driversMessage/initList.do";
     public static final String DELETE_MESSAGE = SERVER + "driversApp/driversMessage/deleteMessage.do";
+    public static final String GET_CARRECORD = SERVER + "driversApp/driversCar/initCarRecordList.do";
 }

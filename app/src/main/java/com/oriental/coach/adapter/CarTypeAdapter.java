@@ -54,27 +54,30 @@ public class CarTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (!TextUtils.isEmpty(carType.url)) {
             ImageLoader.getInstance().displayImage(carType.url, holder.ivCarPic);
         }
-        if (carType.insuranceRecords != null && !carType.insuranceRecords.isEmpty()) {
-            holder.tvInsuranceRecord.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.insuranceRecordClick(carType);
-                }
-            });
-            holder.tvExamineRecord.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.insuranceRecordClick(carType);
-                }
-            });
-            holder.tvMaintenanceRecord.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.insuranceRecordClick(carType);
-                }
-            });
-        }
-
+        holder.tvInsuranceRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.insuranceRecordClick(carType);
+            }
+        });
+        holder.tvExamineRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.examineRecordClick(carType);
+            }
+        });
+        holder.tvMaintenanceRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.maintenanceRecordClick(carType);
+            }
+        });
+        holder.tvMaintenanceTwiceRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.maintenanceTwiceRecordClick(carType);
+            }
+        });
     }
 
     @Override
@@ -95,6 +98,8 @@ public class CarTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView tvExamineRecord;
         @Bind(R.id.tv_maintenance_record)
         TextView tvMaintenanceRecord;
+        @Bind(R.id.tv_maintenance_twice_record)
+        TextView tvMaintenanceTwiceRecord;
         @Bind(R.id.ll_parent)
         RelativeLayout llParent;
 
@@ -105,10 +110,12 @@ public class CarTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface CarTypeClickListener {
-        public void insuranceRecordClick(CarType carType);
+        void insuranceRecordClick(CarType carType);
 
-        public void examineRecordClick();
+        void examineRecordClick(CarType carType);
 
-        public void maintenanceRecordClick();
+        void maintenanceRecordClick(CarType carType);
+
+        void maintenanceTwiceRecordClick(CarType carType);
     }
 }
