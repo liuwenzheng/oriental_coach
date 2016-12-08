@@ -16,6 +16,7 @@ import com.oriental.coach.net.resp.CarResult;
 import com.oriental.coach.net.resp.LoginResult;
 import com.oriental.coach.net.resp.TeacherResult;
 import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.PreferencesUtil;
 import com.oriental.coach.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -47,8 +48,8 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        etAccounts.setText(PreferencesUtil.getStringByName(LoginActivity.this, "account", ""));
         // TODO: 2016/11/28 0028 test
-        etAccounts.setText("18009186157");
         etPassword.setText("00000000");
     }
 
@@ -85,6 +86,7 @@ public class LoginActivity extends BaseActivity {
                 if (result != null) {
                     requestTeacher(result.tableId);
                 }
+                PreferencesUtil.setStringByName(LoginActivity.this, "account", etAccounts.getText().toString());
             }
 
             @Override
@@ -98,7 +100,9 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
     private Teacher mTeacher;
+
     private void requestTeacher(final String tableId) {
         Map<String, String> req = new HashMap<>();
         req.put("teacharId", tableId);

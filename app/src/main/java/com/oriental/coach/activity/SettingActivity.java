@@ -1,6 +1,5 @@
 package com.oriental.coach.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +50,9 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_logout:
+                intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case R.id.rl_modify_password:
                 intent = new Intent(this, ModifyPasswordActivity.class);
