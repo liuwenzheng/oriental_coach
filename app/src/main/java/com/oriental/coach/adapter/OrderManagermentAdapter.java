@@ -49,12 +49,12 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void initializeItemView(MyViewHolder holder, OrderEntity entity, int position) {
-        if (OrderManagermentActivity.STATE_BESPEAK_FINISHED.equals(entity.orderStatus)) {
+        if (OrderManagermentActivity.STATE_BESPEAK_FINISHED.contains(entity.orderStatus)) {
             holder.ivOrderStatus.setVisibility(View.VISIBLE);
             holder.ivOrderStatus.setImageResource(R.drawable.order_finished_icon);
             holder.rlSurplusTime.setVisibility(View.GONE);
         }
-        if (OrderManagermentActivity.STATE_BESPEAK_CANCEL.equals(entity.orderStatus)) {
+        if (OrderManagermentActivity.STATE_BESPEAK_CANCEL.contains(entity.orderStatus)) {
             holder.ivOrderStatus.setVisibility(View.VISIBLE);
             holder.ivOrderStatus.setImageResource(R.drawable.order_cancel_icon);
             holder.rlSurplusTime.setVisibility(View.GONE);
@@ -68,7 +68,28 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.tvSubject.setText(entity.subject);
         holder.tvPhonenumber.setText(mContext.getString(R.string.phonenumber, entity.phonenumber));
         holder.tvPrice.setText(mContext.getString(R.string.price, String.valueOf(entity.price)));
-        holder.tvPayType.setText(mContext.getString(R.string.pay_type, entity.payType));
+        if (!TextUtils.isEmpty(entity.payType)) {
+            holder.tvPayType.setVisibility(View.VISIBLE);
+            String pay = "";
+            if ("1".equals(entity.payType)) {
+                pay = "支付宝支付";
+            } else if ("2".equals(entity.payType)) {
+                pay = "微信支付";
+            } else if ("3".equals(entity.payType)) {
+                pay = "银联支付";
+            } else if ("4".equals(entity.payType)) {
+                pay = "QQ支付";
+            } else if ("5".equals(entity.payType)) {
+                pay = "线下支付";
+            } else if ("6".equals(entity.payType)) {
+                pay = "已购买课时扣减";
+            } else {
+                holder.tvPayType.setVisibility(View.GONE);
+            }
+            holder.tvPayType.setText(mContext.getString(R.string.pay_type, pay));
+        } else {
+            holder.tvPayType.setVisibility(View.GONE);
+        }
         holder.tvCreateTime.setText(entity.createTime);
         holder.tvOrderNumber.setText(entity.orderNumber);
         holder.tvCourseTime.setText(entity.courseTime);

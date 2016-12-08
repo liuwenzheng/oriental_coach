@@ -55,9 +55,9 @@ public class OrderManagermentActivity extends BaseActivity {
     private List<OrderEntity> mEntities;
     private OrderManagermentAdapter mAdapter;
     private Teacher mTeacher;
-    public static final String STATE_BESPEAK_FINISHED = "2_0";
-    public static final String STATE_BESPEAK_CANCEL = "2";
-    public static final String STATE_BESPEAK_UNFINISHED = "1";
+    public static final String STATE_BESPEAK_FINISHED = "3,4,5";
+    public static final String STATE_BESPEAK_CANCEL = "1_0,2_0,2_1";
+    public static final String STATE_BESPEAK_UNFINISHED = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class OrderManagermentActivity extends BaseActivity {
                             calendar = Utils.strDate2Calendar(timeMinute, Constants.PATTERN_YYYY_MM_DD_HH_MM);
 
                             if (Utils.compareDate(calendar.getTime(), Calendar.getInstance().getTime()) != 1) {
-                                entity.surplusTime = "0天0小时0分钟";
+                                entity.surplusTime = "正在完成中";
                             } else {
                                 int time = Utils.getIntervalMin(Utils.calendar2strDate(Calendar.getInstance(), Constants.PATTERN_YYYY_MM_DD_HH_MM),
                                         timeMinute,
@@ -132,7 +132,7 @@ public class OrderManagermentActivity extends BaseActivity {
                         entity.phonenumber = result.studentPhone;
                         entity.headerUrl = result.studentLogo;
                         entity.price = result.bespeakSumMoney;
-                        entity.payType = "支付宝";
+                        entity.payType = result.tradeType;
                         Calendar addTime = Calendar.getInstance();
                         addTime.setTime(result.bespeakAddtime);
                         entity.createTime = Utils.calendar2strDate(addTime, Constants.PATTERN_YYYY_MM_DD_HH_MM);
