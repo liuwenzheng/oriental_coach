@@ -141,6 +141,7 @@ public class MainMyFragment extends Fragment {
                 break;
             case R.id.ll_my_order_message:
                 intent = new Intent(getActivity(), OrderMessageActivity.class);
+                intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 break;
             case R.id.ll_my_share:

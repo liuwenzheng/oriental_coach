@@ -14,4 +14,6 @@ public class Urls {
     public static final String GET_BESPEAK = SERVER + "driversApp/driversStudentBespeak/initBespeakList.do";
     public static final String GET_STUDENT = SERVER + "driversApp/driversTeacher/selectSudentList.do";
     public static final String GET_APPOINTMENT = SERVER + "driversApp/driversTeacherTime/selectOneDayTime.do";
+    public static final String GET_MESSAGE = SERVER + "driversApp/driversMessage/initList.do";
+    public static final String DELETE_MESSAGE = SERVER + "driversApp/driversMessage/deleteMessage.do";
 }

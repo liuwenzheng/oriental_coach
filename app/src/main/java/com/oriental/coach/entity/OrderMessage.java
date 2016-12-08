@@ -12,4 +12,6 @@ public class OrderMessage {
     public String time;
     // 是否选中
     public boolean isSelected;
+    // 消息ID
+    public String messageId;
 }
