@@ -1,7 +1,7 @@
 package com.oriental.coach.utils;
 
-import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
+import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -268,5 +268,29 @@ public class Utils {
             bString += tmp.substring(tmp.length() - 4);
         }
         return bString;
+    }
+
+    /**
+     * 修改身份证号码后四位为*
+     *
+     * @param number
+     * @return
+     */
+    public static String encryptCertificateNumber(String number) {
+        if (TextUtils.isEmpty(number)) {
+            return "";
+        }
+        if (number.length() <= 6) {
+            return number;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < number.length(); i++) {
+            char c = number.charAt(i);
+            if (i > number.length() - 5 && i < number.length()) {
+                c = '*';
+            }
+            sb.append(c);
+        }
+        return sb.toString();
     }
 }

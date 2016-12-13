@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
+import com.oriental.coach.utils.PreferencesUtil;
 import com.zcw.togglebutton.ToggleButton;
 
 import butterknife.Bind;
@@ -51,6 +52,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.btn_logout:
                 intent = new Intent(this, LoginActivity.class);
+                PreferencesUtil.setStringByName(this, "teacherId", "");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;

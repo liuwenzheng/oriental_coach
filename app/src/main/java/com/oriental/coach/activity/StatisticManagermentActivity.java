@@ -1,18 +1,29 @@
 package com.oriental.coach.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
+import com.oriental.coach.net.callback.DialogCallback;
+import com.oriental.coach.net.resp.BaseResponse;
+import com.oriental.coach.net.resp.StatisticalResult;
+import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.PreferencesUtil;
+import com.oriental.coach.utils.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * @Author lwz
@@ -51,6 +62,45 @@ public class StatisticManagermentActivity extends BaseActivity {
         setContentView(R.layout.activity_statistic_managerment);
         ButterKnife.bind(this);
         tvHeaderTitle.setText("统计管理");
+        String teacherId = PreferencesUtil.getStringByName(this, "teacherId", "");
+        if (!TextUtils.isEmpty(teacherId)) {
+            Map<String, String> map = new HashMap<>();
+            map.put("teacharId", teacherId);
+            requestGet(Urls.GET_STATISTICAL, map, new DialogCallback<BaseResponse<StatisticalResult>>(this) {
+                @Override
+                public void onSuccess(BaseResponse<StatisticalResult> statisticalResultBaseResponse, Call call, Response response) {
+                    StatisticalResult result = statisticalResultBaseResponse.resObject;
+                    if (result != null) {
+                        if (result.day != null) {
+                            tvStatisticDailyNumber.setText(result.day.num + "");
+                            tvStatisticDailyMoneyAmount.setText(result.day.money + "");
+                            tvStatisticDailyMoneyPart.setText(result.day.deductratio + "");
+                        }
+                        if (result.month != null) {
+                            tvStatisticMonthNumber.setText(result.month.num + "");
+                            tvStatisticMonthMoneyAmount.setText(result.month.money + "");
+                            tvStatisticMonthMoneyPart.setText(result.month.deductratio + "");
+                        }
+                        if (result.year != null) {
+                            tvStatisticYearNumber.setText(result.year.num + "");
+                            tvStatisticYearMoneyAmount.setText(result.year.money + "");
+                            tvStatisticYearMoneyPart.setText(result.year.deductratio + "");
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(Call call, Response response, Exception e) {
+                    super.onError(call, response, e);
+                    if (e instanceof IllegalStateException) {
+                        ToastUtils.showToast(StatisticManagermentActivity.this, e.getMessage());
+                    }
+                }
+            });
+        } else {
+            finish();
+            return;
+        }
     }
 
 

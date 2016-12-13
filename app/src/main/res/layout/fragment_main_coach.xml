@@ -26,7 +26,7 @@
             android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
-            android:src="@drawable/daily_plan_icon" />
+            android:src="@drawable/default_image" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                     android:id="@+id/tv_my_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="教练名字"
+                    android:text=""
                     android:textColor="@color/white_ffffff"
                     android:textSize="16sp" />
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/tv_my_name"
-                    android:text="驾龄：5年"
+                    android:text="驾龄："
                     android:textColor="@color/white_ffffff"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_my_name"
                 android:layout_marginTop="12dp"
-                android:text="运城新东方驾校"
+                android:text=""
                 android:textColor="@color/white_ffffff"
                 android:textSize="16sp" />
         </LinearLayout>

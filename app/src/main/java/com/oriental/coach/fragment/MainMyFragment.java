@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.activity.CarTypeActivity;
-import com.oriental.coach.activity.OrderMessageActivity;
 import com.oriental.coach.activity.SettingActivity;
 import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.net.urls.Urls;
@@ -62,11 +61,19 @@ public class MainMyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_my, null);
         ButterKnife.bind(this, view);
         // 从activity传过来的Bundle
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            mTeacher = bundle.getParcelable("teacher");
-        }
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            mTeacher = bundle.getParcelable("teacher");
+//        }
         return view;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        mTeacher = teacher;
+    }
+
+    public void refreshView() {
+        initView();
     }
 
     @Override
@@ -139,11 +146,11 @@ public class MainMyFragment extends Fragment {
                 intent.putExtra("teacher", mTeacher);
                 startActivity(intent);
                 break;
-            case R.id.ll_my_order_message:
-                intent = new Intent(getActivity(), OrderMessageActivity.class);
-                intent.putExtra("teacher", mTeacher);
-                startActivity(intent);
-                break;
+//            case R.id.ll_my_order_message:
+//                intent = new Intent(getActivity(), OrderMessageActivity.class);
+//                intent.putExtra("teacher", mTeacher);
+//                startActivity(intent);
+//                break;
             case R.id.ll_my_share:
                 if (!getActivity().isFinishing() && mSharePopupWindow != null && mSharePopupWindow.isShowing()) {
                     showSharePopup(true);

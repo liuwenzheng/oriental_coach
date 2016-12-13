@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">oriental_coach</string>
     <string name="main_tab_home">首页</string>
+    <string name="main_tab_message">消息</string>
     <string name="main_tab_my">我的</string>
     <string name="student_managerment">学员管理</string>
     <string name="daily_plan">日程安排</string>

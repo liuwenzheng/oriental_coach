@@ -59,10 +59,10 @@ public class MainCoachFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_coach, null);
         ButterKnife.bind(this, view);
         // 从activity传过来的Bundle
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            mTeacher = bundle.getParcelable("teacher");
-        }
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            mTeacher = bundle.getParcelable("teacher");
+//        }
         return view;
     }
 
@@ -71,6 +71,14 @@ public class MainCoachFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LogModule.i(TAG, "onViewCreated");
         ButterKnife.bind(this, view);
+        initView();
+    }
+
+    public void setTeacher(Teacher teacher) {
+        mTeacher = teacher;
+    }
+
+    public void refreshView() {
         initView();
     }
 

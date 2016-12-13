@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.rebound.ui.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oriental.coach.R;
 import com.oriental.coach.entity.Student;
+import com.oriental.coach.utils.Utils;
 
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class StudentManagermentAdapter extends RecyclerView.Adapter<RecyclerView
             holder.ivGender.setImageResource(R.drawable.gender_female);
         }
         holder.tvPhonenumber.setText(mContext.getString(R.string.phonenumber, student.phonenumber));
-        holder.tvIdentityCard.setText(mContext.getString(R.string.identity_card, student.identityCard));
+        holder.tvIdentityCard.setText(mContext.getString(R.string.identity_card, Utils.encryptCertificateNumber(student.identityCard)));
         holder.tv_course_type.setText(student.subject);
         if (!TextUtils.isEmpty(student.headerUrl)) {
             ImageLoader.getInstance().displayImage(student.headerUrl, holder.ciHeader);

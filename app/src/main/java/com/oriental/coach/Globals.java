@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
+import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,7 +35,9 @@ public class Globals extends Application {
                     .debug("OkGo", Level.INFO, true)
                     .addCommonHeaders(new HttpHeaders("Connection", "close"))
                     // cookie使用内存缓存（app退出后，cookie消失）
-                    .setCookieStore(new MemoryCookieStore())
+//                    .setCookieStore(new MemoryCookieStore())
+                    // cookie持久化存储，如果cookie不过期，则一直有效
+                    .setCookieStore(new PersistentCookieStore())
                     .setConnectTimeout(10000L)  //全局的连接超时时间
                     .setReadTimeOut(10000L)     //全局的读取超时时间
                     .setWriteTimeOut(10000L);   //全局的写入超时时间

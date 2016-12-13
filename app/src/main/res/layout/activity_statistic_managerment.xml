@@ -61,7 +61,7 @@
                         android:id="@+id/tv_statistic_daily_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -85,7 +85,7 @@
                         android:id="@+id/tv_statistic_daily_money_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="780"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -109,7 +109,7 @@
                         android:id="@+id/tv_statistic_daily_money_part"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -171,7 +171,7 @@
                         android:id="@+id/tv_statistic_month_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -195,7 +195,7 @@
                         android:id="@+id/tv_statistic_month_money_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="780"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -219,7 +219,7 @@
                         android:id="@+id/tv_statistic_month_money_part"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -282,7 +282,7 @@
                         android:id="@+id/tv_statistic_year_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -306,7 +306,7 @@
                         android:id="@+id/tv_statistic_year_money_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="780"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 
@@ -330,7 +330,7 @@
                         android:id="@+id/tv_statistic_year_money_part"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:textColor="@color/blue_0079bc"
                         android:textSize="15sp" />
 

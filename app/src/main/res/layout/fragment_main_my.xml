@@ -61,7 +61,7 @@
                                 android:id="@+id/tv_my_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="教练名字"
+                                android:text=""
                                 android:textColor="@color/black_424242"
                                 android:textSize="16sp" />
 
@@ -78,7 +78,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_toRightOf="@id/tv_my_name"
-                                android:text="男"
+                                android:text=""
                                 android:textColor="@color/black_424242"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tv_my_name"
                             android:layout_marginTop="10dp"
-                            android:text="电话：13512345678"
+                            android:text="电话："
                             android:textColor="@color/black_666666"
                             android:textSize="14sp" />
 
@@ -102,7 +102,7 @@
                             android:layout_marginTop="3dp"
                             android:isIndicator="true"
                             android:numStars="5"
-                            android:rating="4" />
+                            android:rating="0" />
                     </LinearLayout>
 
 
@@ -125,7 +125,7 @@
                             android:id="@+id/tv_my_driving_years"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5"
+                            android:text="0"
                             android:textColor="@color/blue_167dcc"
                             android:textSize="20sp" />
 
@@ -150,7 +150,7 @@
                             android:id="@+id/tv_my_student_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="30"
+                            android:text="0"
                             android:textColor="@color/blue_167dcc"
                             android:textSize="20sp" />
 
@@ -175,7 +175,7 @@
                             android:id="@+id/tv_my_feedback_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="96"
+                            android:text="0"
                             android:textColor="@color/blue_167dcc"
                             android:textSize="20sp" />
 
@@ -227,7 +227,7 @@
                     android:layout_height="47dp"
                     android:layout_marginLeft="25dp"
                     android:gravity="center_vertical"
-                    android:text="陕西省运城市"
+                    android:text=""
                     android:textColor="@color/black_424242"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -272,7 +272,7 @@
                     android:layout_height="47dp"
                     android:layout_marginLeft="25dp"
                     android:gravity="center_vertical"
-                    android:text="雪铁龙"
+                    android:text=""
                     android:textColor="@color/black_424242"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -310,7 +310,7 @@
                     android:layout_height="47dp"
                     android:layout_marginLeft="25dp"
                     android:gravity="center_vertical"
-                    android:text="科目一"
+                    android:text=""
                     android:textColor="@color/black_424242"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -327,7 +327,8 @@
                     android:id="@+id/ll_my_order_message"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:paddingLeft="15dp">
+                    android:paddingLeft="15dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

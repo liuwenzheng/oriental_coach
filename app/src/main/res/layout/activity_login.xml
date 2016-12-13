@@ -27,7 +27,7 @@
             android:drawableLeft="@drawable/login_accounts"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
-            android:hint="请输入身份证号码"
+            android:hint="请输入帐号"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:singleLine="true"

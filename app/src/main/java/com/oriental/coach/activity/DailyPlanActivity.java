@@ -146,9 +146,9 @@ public class DailyPlanActivity extends BaseActivity {
                         plan.licenseLevel = result.timeLicense;
                         String subject;
                         if ("1".equals(result.timeSourse)) {
-                            subject = "科目二";
+                            subject = "科目二普通";
                         } else if ("2".equals(result.timeSourse)) {
-                            subject = "科目二 场地";
+                            subject = "科目二场内";
                         } else {
                             subject = "科目三";
                         }

@@ -124,7 +124,7 @@ public class OrderManagermentActivity extends BaseActivity {
                         if ("1".equals(result.timeSourse)) {
                             subject = "科目二普通";
                         } else if ("2".equals(result.timeSourse)) {
-                            subject = "科目二场地";
+                            subject = "科目二场内";
                         } else {
                             subject = "科目三";
                         }

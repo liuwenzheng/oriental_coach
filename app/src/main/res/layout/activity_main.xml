@@ -14,7 +14,60 @@
 
     <View style="@style/divider_line" />
 
-    <RelativeLayout
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_main_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_rb_main_home"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/main_tab_home"
+            android:textColor="@drawable/selector_rb_common_text_grey"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_rb_main_message"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/main_tab_message"
+            android:textColor="@drawable/selector_rb_common_text_grey"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main_my"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_rb_main_my"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/main_tab_my"
+            android:textColor="@drawable/selector_rb_common_text_grey"
+            android:textSize="11sp" />
+    </RadioGroup>
+
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_ffffff">
@@ -35,6 +88,21 @@
             android:textSize="11sp" />
 
         <Button
+            android:id="@+id/btn_main_message"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/message_selected"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/main_tab_message"
+            android:textColor="@color/grey_9a9a9a"
+            android:textSize="11sp" />
+
+        <Button
             android:id="@+id/btn_main_my"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -48,5 +116,5 @@
             android:text="@string/main_tab_my"
             android:textColor="@color/grey_9a9a9a"
             android:textSize="11sp" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 </LinearLayout>
