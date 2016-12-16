@@ -35,7 +35,7 @@ public class StatisticMonthAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_statistic_daily_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_statistic_month_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -51,10 +51,10 @@ public class StatisticMonthAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             holder.llParent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grey_f8f8f8));
 
         }
-        holder.tvName.setText(month.name);
-        holder.tvPrice.setText(month.price);
-        holder.tvIncome.setText(month.income);
-        holder.tvTime.setText(month.time);
+        holder.tvDate.setText(month.date);
+        holder.tvCount.setText(month.count + "");
+        holder.tvPrice.setText(month.price + "");
+        holder.tvIncome.setText(month.income + "");
     }
 
     @Override
@@ -63,14 +63,14 @@ public class StatisticMonthAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tv_name)
-        TextView tvName;
+        @Bind(R.id.tv_date)
+        TextView tvDate;
+        @Bind(R.id.tv_count)
+        TextView tvCount;
         @Bind(R.id.tv_price)
         TextView tvPrice;
         @Bind(R.id.tv_income)
         TextView tvIncome;
-        @Bind(R.id.tv_time)
-        TextView tvTime;
         @Bind(R.id.ll_parent)
         LinearLayout llParent;
 

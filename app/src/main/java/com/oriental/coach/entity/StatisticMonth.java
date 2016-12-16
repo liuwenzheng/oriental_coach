@@ -6,12 +6,12 @@ package com.oriental.coach.entity;
  * @Describe 统计管理
  */
 public class StatisticMonth {
-    // 学员姓名
-    public String name;
-    // 预约价格
-    public String price;
-    // 抽成
-    public String income;
-    // 预约时间
-    public String time;
+    // 日期
+    public String date;
+    // 预约人数
+    public int count;
+    // 总金额
+    public double price;
+    // 总抽成
+    public double income;
 }

@@ -51,9 +51,9 @@ public class StatisticYearAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         }
         holder.tvMonth.setText(daily.month);
-        holder.tvCount.setText(daily.count);
-        holder.tvPrice.setText(daily.price);
-        holder.tvIncome.setText(daily.income);
+        holder.tvCount.setText(daily.count + "");
+        holder.tvPrice.setText(daily.price + "");
+        holder.tvIncome.setText(daily.income + "");
     }
 
     @Override

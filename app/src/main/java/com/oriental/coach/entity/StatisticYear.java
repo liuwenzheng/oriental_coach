@@ -9,9 +9,9 @@ public class StatisticYear {
     // 月份
     public String month;
     // 预约人数
-    public String count;
+    public int count;
     // 总金额
-    public String price;
+    public double price;
     // 总抽成
-    public String income;
+    public double income;
 }

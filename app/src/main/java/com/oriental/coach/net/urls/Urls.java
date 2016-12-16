@@ -19,4 +19,5 @@ public class Urls {
     public static final String GET_CARRECORD = SERVER + "driversApp/driversCar/initCarRecordList.do";
     public static final String GET_STATISTICAL = SERVER + "driversApp/statistical /teacherAppStatistical.do";
     public static final String UPDATE_PASSWORD = SERVER + "user/verificaty/updateUserPwd.do";
+    public static final String GET_APP_BESPEAK = SERVER + "driversApp/statistical/teacherAppBespeak";
 }

@@ -1,43 +1,55 @@
 package com.oriental.coach.net.resp;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * Created by wenzheng.liu on 2016/11/28.
+ * Created by wenzheng.liu on 2016/12/16.
  */
 
-public class TeacherResult implements Serializable {
+public class DriversStatisticalResult implements Serializable {
     /**
-     * teacharId : 5b7b081cc5e74a33916706ebaadd0125
-     * teacharName : 张无忌
-     * teacharSex : 0
-     * teacharIdcard : 510105199010017999
-     * teacharPhone : 18700001111
-     * teacharCarAge : 10
-     * teacharGrade : 4
-     * teacharLogo : /cfw/ueditUpload/img/20161124/edd74f276bd24d63a208d71acab66a4c.png
-     * proviceCode : 14
-     * proviceName : 山西省
-     * citeCode : 1408
-     * citeName : 运城市
-     * countyCode : 140802
-     * countyName : 盐湖区
-     * areaCode : 140802001
-     * areaName : 中城街道
-     * addressDetail : 谢大脚超市
-     * mapX : 37.866872
-     * mapY : 112.528689
-     * openOff : 0
-     * teacharState : 1
-     * teacharType : 1
-     * licenseType : C1,C2
-     * courseType : 1,2,3
+     * num : 1
+     * money : 100
+     * deductSum : 0
+     * deductRatio : 20
+     * date : null
+     * takeMoney : null
+     * time : 12
+     * schoolCorporate : null
+     * schoolTele : null
+     * schoolComment : null
+     * schoolState : null
+     * teacharId : null
+     * teacharName : null
+     * teacharSex : null
+     * teacharIdcard : null
+     * teacharPhone : null
+     * teacharCarAge : null
+     * teacharGrade : null
+     * teacharLogo : null
+     * proviceCode : null
+     * proviceName : null
+     * citeCode : null
+     * citeName : null
+     * countyCode : null
+     * countyName : null
+     * areaCode : null
+     * areaName : null
+     * addressDetail : null
+     * mapX : null
+     * mapY : null
+     * openOff : null
+     * teacharState : null
+     * teacharType : null
+     * licenseType : null
+     * courseType : null
      * teacharGood : null
      * teacharOrder : null
-     * schoolId : af8fd49c34e345799a8269110bc93038
+     * schoolId : null
      * schoolName : null
-     * carId : fc3551342a554f37a44304022c6c1f2c
-     * carType : 1
+     * carId : null
+     * carType : null
      * carName : null
      * carCode : null
      * timeId : null
@@ -51,20 +63,31 @@ public class TeacherResult implements Serializable {
      * timeState : null
      * timeOff : null
      * nearestDistance : 0
-     * studentCnt : 2
+     * studentCnt : 0
      * studentId : null
      * isTeachar : null
      * stuCollection : null
-     * goodCommPro : 0.8
+     * goodCommPro : 0
      */
 
+    public int num;
+    public int money;
+    public int deductSum;
+    public int deductRatio;
+    public Date date;
+    public double takeMoney;
+    public int time;
+    public String schoolCorporate;
+    public String schoolTele;
+    public String schoolComment;
+    public String schoolState;
     public String teacharId;
     public String teacharName;
     public String teacharSex;
     public String teacharIdcard;
     public String teacharPhone;
-    public int teacharCarAge;
-    public double teacharGrade;
+    public String teacharCarAge;
+    public String teacharGrade;
     public String teacharLogo;
     public String proviceCode;
     public String proviceName;
@@ -105,5 +128,5 @@ public class TeacherResult implements Serializable {
     public String studentId;
     public String isTeachar;
     public String stuCollection;
-    public double goodCommPro;
+    public int goodCommPro;
 }

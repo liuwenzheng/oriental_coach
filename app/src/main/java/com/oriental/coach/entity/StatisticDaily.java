@@ -9,7 +9,7 @@ public class StatisticDaily {
     // 学员姓名
     public String name;
     // 预约价格
-    public String price;
+    public double price;
     // 抽成
     public String income;
     // 预约时间

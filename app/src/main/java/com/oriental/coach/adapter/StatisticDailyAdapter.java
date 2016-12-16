@@ -52,7 +52,7 @@ public class StatisticDailyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         }
         holder.tvName.setText(daily.name);
-        holder.tvPrice.setText(daily.price);
+        holder.tvPrice.setText(daily.price + "");
         holder.tvIncome.setText(daily.income);
         holder.tvTime.setText(daily.time);
     }
