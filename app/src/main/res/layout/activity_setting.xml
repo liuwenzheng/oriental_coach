@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,7 +46,9 @@
         </RelativeLayout>
 
 
-        <View style="@style/divider_line" />
+        <!--
+                <View style="@style/divider_line" />
+        -->
 
         <RelativeLayout
             android:id="@+id/rl_modify_password"

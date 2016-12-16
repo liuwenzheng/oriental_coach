@@ -14,4 +14,6 @@ public class OrderMessage {
     public boolean isSelected;
     // 消息ID
     public String messageId;
+    // 消息状态
+    public String msgStatus;
 }

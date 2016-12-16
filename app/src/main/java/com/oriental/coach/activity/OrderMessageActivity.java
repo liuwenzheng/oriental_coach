@@ -71,7 +71,7 @@ public class OrderMessageActivity extends BaseActivity {
             return;
         }
         mMessages = new ArrayList<>();
-        mAdapter = new OrderMessageAdapter(this, mMessages);
+        mAdapter = new OrderMessageAdapter(this, mMessages, null);
         rvList.setLayoutManager(new LinearLayoutManager(this));
         rvList.setAdapter(mAdapter);
         createData();

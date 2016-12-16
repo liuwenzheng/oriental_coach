@@ -22,6 +22,7 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Context mContext;
     private boolean mCanSelect;
+    private OnChangeMsgStatusListener mListener;
 
     public void setDatas(List<OrderMessage> mMessages) {
         this.mMessages = mMessages;
@@ -29,9 +30,10 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private List<OrderMessage> mMessages;
 
-    public OrderMessageAdapter(Context context, List<OrderMessage> mMessages) {
+    public OrderMessageAdapter(Context context, List<OrderMessage> mMessages, OnChangeMsgStatusListener listener) {
         this.mContext = context;
         this.mMessages = mMessages;
+        this.mListener = listener;
     }
 
     @Override
@@ -48,6 +50,11 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private void initializeItemView(MyViewHolder holder, final OrderMessage message, int position) {
         holder.tvContent.setText(message.content);
         holder.tvTime.setText(message.time);
+        if ("0".equals(message.msgStatus)) {
+            holder.ivMsgStatus.setImageResource(R.drawable.msg_close);
+        } else {
+            holder.ivMsgStatus.setImageResource(R.drawable.msg_open);
+        }
         if (mCanSelect) {
             holder.ivSelected.setVisibility(View.VISIBLE);
             holder.ivSelected.setImageResource(message.isSelected ? R.drawable.checked : R.drawable.unchecked);
@@ -63,6 +70,16 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else {
             message.isSelected = false;
             holder.ivSelected.setVisibility(View.GONE);
+            if ("0".equals(message.msgStatus)) {
+                holder.rlParent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onClickChangeStatus(message);
+                    }
+                });
+            } else {
+                holder.rlParent.setOnClickListener(null);
+            }
         }
     }
 
@@ -82,6 +99,8 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tvTime;
         @Bind(R.id.iv_selected)
         ImageView ivSelected;
+        @Bind(R.id.iv_msg_status)
+        ImageView ivMsgStatus;
         @Bind(R.id.rl_prarent)
         RelativeLayout rlParent;
 
@@ -89,5 +108,9 @@ public class OrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface OnChangeMsgStatusListener {
+        void onClickChangeStatus(OrderMessage message);
     }
 }

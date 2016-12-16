@@ -41,7 +41,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 
-public class MainMessageFragment extends Fragment {
+public class MainMessageFragment extends Fragment implements OrderMessageAdapter.OnChangeMsgStatusListener {
 
     public static final String TAG = MainMessageFragment.class.getSimpleName();
     @Bind(R.id.tv_header_title)
@@ -77,7 +77,7 @@ public class MainMessageFragment extends Fragment {
 
     private void initData() {
         mMessages = new ArrayList<>();
-        mAdapter = new OrderMessageAdapter(getActivity(), mMessages);
+        mAdapter = new OrderMessageAdapter(getActivity(), mMessages, this);
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvList.setAdapter(mAdapter);
         createData();
@@ -86,6 +86,7 @@ public class MainMessageFragment extends Fragment {
     private void initView() {
         ivHeaderBack.setVisibility(View.GONE);
         tvHeaderTitle.setText("订单消息");
+        tvHeaderRight.setText("删除");
     }
 
 
@@ -105,7 +106,7 @@ public class MainMessageFragment extends Fragment {
                 List<MessageResult> results = listBaseResponse.resObject;
                 if (results != null && !results.isEmpty()) {
                     for (int i = 0; i < results.size(); i++) {
-                        MessageResult result = results.get(0);
+                        MessageResult result = results.get(i);
                         OrderMessage message = new OrderMessage();
                         message.content = result.messageContent;
                         message.messageId = result.messageId;
@@ -113,6 +114,7 @@ public class MainMessageFragment extends Fragment {
                         calendar.setTime(result.messageCreate);
                         message.time = Utils.calendar2strDate(calendar, Constants.PATTERN_YYYY_MM_DD_HH_MM_SS);
                         message.isSelected = false;
+                        message.msgStatus = result.messageState;
                         mMessages.add(message);
                     }
                     mAdapter.setDatas(mMessages);
@@ -182,6 +184,15 @@ public class MainMessageFragment extends Fragment {
                                     iterator.remove();
                                 }
                             }
+                            mCanSelect = !mCanSelect;
+                            mAdapter.setCanSelect(mCanSelect);
+                            if (mCanSelect) {
+                                tvHeaderRight.setText("取消");
+                                rl_delete.setVisibility(View.VISIBLE);
+                            } else {
+                                tvHeaderRight.setText("删除");
+                                rl_delete.setVisibility(View.GONE);
+                            }
                             mAdapter.setDatas(mMessages);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -223,5 +234,28 @@ public class MainMessageFragment extends Fragment {
     public void onStop() {
         LogModule.i(TAG, "onStop");
         super.onStop();
+    }
+
+    @Override
+    public void onClickChangeStatus(final OrderMessage message) {
+        Map<String, String> map = new HashMap<>();
+        map.put("messageId", message.messageId);
+        map.put("messageState", "1");
+        ((MainActivity) getActivity()).requestGet(Urls.UPDATE_MESSAGE, map, new DialogCallback<BaseResponse<Object>>(getActivity()) {
+            @Override
+            public void onSuccess(BaseResponse baseResponse, Call call, Response response) {
+                ToastUtils.showToast(getActivity(), baseResponse.stateMess);
+                message.msgStatus = "1";
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (e instanceof IllegalStateException) {
+                    ToastUtils.showToast(getActivity(), e.getMessage());
+                }
+            }
+        });
     }
 }
