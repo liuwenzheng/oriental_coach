@@ -65,7 +65,7 @@ public class StatisticManagermentActivity extends BaseActivity {
         String teacherId = PreferencesUtil.getStringByName(this, "teacherId", "");
         if (!TextUtils.isEmpty(teacherId)) {
             Map<String, String> map = new HashMap<>();
-            map.put("teacharId", teacherId);
+            map.put("teacherId", teacherId);
             requestGet(Urls.GET_STATISTICAL, map, new DialogCallback<BaseResponse<StatisticalResult>>(this) {
                 @Override
                 public void onSuccess(BaseResponse<StatisticalResult> statisticalResultBaseResponse, Call call, Response response) {

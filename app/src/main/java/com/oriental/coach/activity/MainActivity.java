@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
                     public void run() {
                         requestTeacher(teacherId);
                     }
-                }, 500);
+                }, 800);
             }
         } else {
             finish();

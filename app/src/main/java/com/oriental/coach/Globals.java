@@ -33,11 +33,13 @@ public class Globals extends Application {
                     // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
                     // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
                     .debug("OkGo", Level.INFO, true)
-                    .addCommonHeaders(new HttpHeaders("Connection", "close"))
+                    // .addCommonHeaders(new HttpHeaders("Connection", "close"))
                     // cookie使用内存缓存（app退出后，cookie消失）
 //                    .setCookieStore(new MemoryCookieStore())
                     // cookie持久化存储，如果cookie不过期，则一直有效
                     .setCookieStore(new PersistentCookieStore())
+                    //可以全局统一设置超时重连次数,默认为三次,那么最差的情况会请求4次(一次原始请求,三次重连请求),不需要可以设置为0
+                    .setRetryCount(0)
                     .setConnectTimeout(10000L)  //全局的连接超时时间
                     .setReadTimeOut(10000L)     //全局的读取超时时间
                     .setWriteTimeOut(10000L);   //全局的写入超时时间
@@ -45,13 +47,13 @@ public class Globals extends Application {
             e.printStackTrace();
         }
         //  java.io.EOFException
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Connection", "close");
+//        Map<String, String> headers = new HashMap<>();
+//        headers.put("Connection", "close");
         // imageloader默认全局配置项
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
-                .extraForDownloader(headers)
+//                .extraForDownloader(headers)
                 .showImageForEmptyUri(R.drawable.default_image)
                 .showImageOnLoading(R.drawable.default_image)
                 .showImageOnFail(R.drawable.default_image)
