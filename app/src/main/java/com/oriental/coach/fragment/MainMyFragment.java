@@ -86,7 +86,7 @@ public class MainMyFragment extends Fragment {
     private void initView() {
         if (mTeacher != null) {
             tv_my_name.setText(mTeacher.name);
-            tv_my_gender.setText("1".equals(mTeacher.gender) ? "女" : "男");
+            tv_my_gender.setText("2".equals(mTeacher.gender) ? "女" : "男");
             tv_my_phonenumber.setText(getString(R.string.phonenumber, mTeacher.phoneNo));
             if (mTeacher.goodCommPro > 0 && mTeacher.goodCommPro <= 20) {
                 rb_my_rating.setRating(1);
