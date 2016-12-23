@@ -244,7 +244,7 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
         ((MainActivity) getActivity()).requestGet(Urls.UPDATE_MESSAGE, map, new DialogCallback<BaseResponse<Object>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse baseResponse, Call call, Response response) {
-                ToastUtils.showToast(getActivity(), baseResponse.stateMess);
+                ToastUtils.showToast(getActivity(), "已阅读");
                 message.msgStatus = "1";
                 mAdapter.notifyDataSetChanged();
             }

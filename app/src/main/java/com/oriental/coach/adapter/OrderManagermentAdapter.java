@@ -82,7 +82,7 @@ public class OrderManagermentAdapter extends RecyclerView.Adapter<RecyclerView.V
             } else if ("5".equals(entity.payType)) {
                 pay = "线下支付";
             } else if ("6".equals(entity.payType)) {
-                pay = "已购买课时扣减";
+                pay = "购买课时扣减";
             } else {
                 holder.tvPayType.setVisibility(View.GONE);
             }
