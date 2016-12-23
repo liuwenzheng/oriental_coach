@@ -154,7 +154,15 @@ public class DailyPlanActivity extends BaseActivity {
                         }
                         plan.subject = subject;
                         plan.price = String.valueOf(result.timeMondy);
-                        plan.status = "0".equals(result.timeOff) ? "不可预约" : "可预约";
+                        String status = null;
+                        if ("0".equals(result.timeOff)) {
+                            status = "不可预约";
+                        } else if ("1".equals(result.timeState)) {
+                            status = "已被预约";
+                        } else {
+                            status = "可预约";
+                        }
+                        plan.status = status;
                         mDatas.add(plan);
                     }
                     mAdapter.setDatas(mDatas);
