@@ -4,17 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.google.gson.stream.JsonReader;
+import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
 import com.oriental.coach.Constants;
 import com.oriental.coach.activity.LoginActivity;
 import com.oriental.coach.net.Convert;
 import com.oriental.coach.net.resp.BaseResponse;
+import com.oriental.coach.net.resp.LoginResult;
 import com.oriental.coach.net.resp.SimpleResponse;
+import com.oriental.coach.net.urls.Urls;
 import com.oriental.coach.utils.PreferencesUtil;
+import com.oriental.coach.utils.ToastUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
+import okhttp3.Call;
 import okhttp3.Response;
 
 
@@ -58,13 +65,28 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                 // 成功返回实体bean
                 return (T) baseResponse;
             } else if (Constants.NET_STATE_CODE_SESSION_TIMEOUT.equals(code)) {
-                // session失效
-                if (mActivity != null && !(mActivity instanceof LoginActivity)) {
-                    PreferencesUtil.setStringByName(mActivity, "teacherId", "");
-                    Intent intent = new Intent(mActivity, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    mActivity.startActivity(intent);
-                }
+                String account = PreferencesUtil.getStringByName(mActivity, "account", "");
+                String password = PreferencesUtil.getStringByName(mActivity, "password", "");
+                Map<String, String> req = new HashMap<>();
+                req.put("account", account);
+                req.put("password", password);
+                OkGo.get(Urls.LOGIN).tag(this).params(req).execute(new JsonCallback<BaseResponse<LoginResult>>(mActivity) {
+                    @Override
+                    public void onSuccess(BaseResponse<LoginResult> loginResult, Call call, Response response) {
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        // 缓存的帐号密码错误
+                        if (mActivity != null && !(mActivity instanceof LoginActivity)) {
+                            PreferencesUtil.setStringByName(mActivity, "teacherId", "");
+                            Intent intent = new Intent(mActivity, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            mActivity.startActivity(intent);
+                        }
+                    }
+                });
                 // 失败返回错误信息，抛出错误，会在onError中回调。
                 throw new IllegalStateException(mess);
             } else {

@@ -88,6 +88,7 @@ public class LoginActivity extends BaseActivity {
                     PreferencesUtil.setStringByName(LoginActivity.this, "teacherId", result.tableId);
                     PreferencesUtil.setStringByName(LoginActivity.this, "account", etAccounts.getText().toString());
                     PreferencesUtil.setStringByName(LoginActivity.this, "userId", result.userId);
+                    PreferencesUtil.setStringByName(LoginActivity.this, "password", etPassword.getText().toString());
                     gotoMainActivity();
                 }
             }
