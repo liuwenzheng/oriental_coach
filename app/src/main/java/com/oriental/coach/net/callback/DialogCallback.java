@@ -7,6 +7,8 @@ import android.view.Window;
 
 import com.lzy.okgo.request.BaseRequest;
 
+import okhttp3.Response;
+
 /**
  * 对于网络请求是否需要弹出进度对话框/
  */
@@ -28,12 +30,12 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
     }
 
     public DialogCallback(Activity activity) {
-        super();
+        super(activity);
         initDialog(activity);
     }
 
     public DialogCallback(Activity activity, boolean cancelable) {
-        super();
+        super(activity);
         initDialog(activity, cancelable);
     }
 
