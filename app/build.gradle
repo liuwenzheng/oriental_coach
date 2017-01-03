@@ -12,10 +12,40 @@ android {
         versionName "1.0"
     }
 
+    sourceSets {
+        lintOptions {
+            abortOnError false
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'alias'
+            keyPassword '123456789'
+            storeFile file('D:\\AndroidStudioProjects\\oriental_coach\\app\\keystore\\yilonesymapk')
+            storePassword '123456789'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                def fileName = "driversTeacher-${defaultConfig.versionName}.apk"
+                if (outputFile.name.contains('debug')) {
+                    fileName = "driversTeacher-${defaultConfig.versionName}-debug.apk"
+                }
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
 }
