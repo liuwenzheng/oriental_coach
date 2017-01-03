@@ -54,9 +54,6 @@ public class Globals extends Application {
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
 //                .extraForDownloader(headers)
-                .showImageForEmptyUri(R.drawable.default_image)
-                .showImageOnLoading(R.drawable.default_image)
-                .showImageOnFail(R.drawable.default_image)
                 .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();

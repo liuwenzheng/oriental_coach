@@ -1,6 +1,14 @@
 package com.oriental.coach.activity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +17,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
@@ -22,9 +31,20 @@ import com.oriental.coach.net.resp.BaseResponse;
 import com.oriental.coach.net.resp.CarResult;
 import com.oriental.coach.net.resp.TeacherResult;
 import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.LogModule;
 import com.oriental.coach.utils.PreferencesUtil;
 import com.oriental.coach.utils.ToastUtils;
+import com.oriental.coach.version.DownLoadAsyncTask;
+import com.oriental.coach.version.GetServerUrl;
+import com.oriental.coach.version.UpdateInfo;
+import com.oriental.coach.version.UpdateInfoService;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +70,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.rg_main)
     RadioGroup rgMain;
     // private Bundle mDatas;
+    private MyHandler handler;
 
     class MyHandler extends BaseHandler<MainActivity> {
 
@@ -60,7 +81,31 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected void handleMessage(MainActivity mainActivity, Message msg) {
+            switch (msg.what) {
+                case 1:
+                    //不提示对话框通知用户升级程序
+                    showUpdateDialog();
+                    break;
 
+                case 2://安装新版本
+                    update();
+                    break;
+                case 3:
+                    final String teacherId = PreferencesUtil.getStringByName(MainActivity.this, "teacherId", "");
+                    if (!TextUtils.isEmpty(teacherId)) {
+                        if (mTeacher == null) {
+                            requestTeacher(teacherId);
+                        }
+                    } else {
+                        MainActivity.this.finish();
+                        return;
+                    }
+                    break;
+                case 500:
+                    //服务器超时
+                    Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
     }
 
@@ -80,20 +125,12 @@ public class MainActivity extends BaseActivity {
         mFragmentManager.beginTransaction().add(R.id.fl_fragment_container, mMainCoachFrament).commit();
         // selectedIcon();
         rbMainHome.setChecked(true);
-        final String teacherId = PreferencesUtil.getStringByName(this, "teacherId", "");
-        if (!TextUtils.isEmpty(teacherId)) {
-            if (mTeacher == null) {
-                new MyHandler(this).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestTeacher(teacherId);
-                    }
-                }, 800);
-            }
-        } else {
-            finish();
-            return;
-        }
+        handler = new MyHandler(this);
+        /**
+         * 比对版本号/读取更新信息/下载APK/安装
+         */
+        CheckVersionTask();
+
         rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -111,6 +148,121 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    private UpdateInfo info;
+
+    /*
+    * 从服务器获取xml解析并进行比对版本号
+    */
+    private void CheckVersionTask() {
+        new Thread() {
+            public void run() {
+                try {
+                    //获取服务器保存版本信息的路径
+                    String path = GetServerUrl.url;
+                    //包装成url的对象
+                    URL url = new URL(path);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setConnectTimeout(5000);
+                    InputStream is = conn.getInputStream();
+                    //解析xml文件封装成对象
+                    info = UpdateInfoService.getUpdataInfo(is);
+                    if (info.getVersion().equals(getVersionName())) {
+                        LogModule.i("版本号相同无需升级");
+                        handler.sendEmptyMessageDelayed(3, 800);
+                    } else {
+                        LogModule.i("版本号不同 ,提示用户升级 ");
+                        Message msg = new Message();
+                        msg.what = 1;
+                        handler.sendMessage(msg);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    // 待处理
+                    Message msg = new Message();
+                    msg.what = 500;
+                    handler.sendMessage(msg);
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+    }
+
+    /**
+     * 安装apk
+     */
+    private void update() {
+        /**
+         * 程序的安装请注意：默认是不支持安装非市场程序的 因此判断一下
+         * 下面是界面设置变动修改的settings信息。1是允许 0是不允许
+         */
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+//    	 	 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "DrivingTeacher.apk")),
+                "application/vnd.android.package-archive");
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 弹出版本升级提示框
+     */
+    private void showUpdateDialog() {
+        AlertDialog.Builder builer = new AlertDialog.Builder(this);
+        builer.setTitle("版本升级");
+        builer.setMessage(info.getDescription());
+        //当点确定按钮时从服务器上下载 新的apk 然后安装
+        builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //开始下载最新APK
+                downFile();
+            }
+        });
+        //当点取消按钮时进行登录
+        builer.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                MainActivity.this.finish();
+            }
+        });
+
+        AlertDialog dialog = builer.create();
+        dialog.setCancelable(false);//点击屏幕和物理返回键dialog不消失
+        dialog.show();
+    }
+
+
+    /*
+     * 从服务器中下载APK
+     */
+    private void downFile() {
+        /**使用异步下载更新进度条下载进度*/
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("正在下载");
+        progressDialog.setMax(100);//进度条最大值
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);//水平样式
+        progressDialog.setIndeterminate(false);//进度条的动画效果（有动画则无进度值）
+        progressDialog.setCanceledOnTouchOutside(false);//点击屏幕dialog不消失
+        //开始下载
+        DownLoadAsyncTask downLoad = new DownLoadAsyncTask(MainActivity.this, handler, progressDialog);
+        downLoad.execute(info.getUrl());
+    }
+
+    /*
+       * 获取当前程序的版本号
+       */
+    private String getVersionName() throws Exception {
+        //获取packagemanager的实例
+        PackageManager packageManager = getPackageManager();
+        //getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
+        return packInfo.versionName;
+    }
+
 
     private Teacher mTeacher;
 

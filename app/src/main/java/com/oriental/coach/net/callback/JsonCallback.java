@@ -14,7 +14,6 @@ import com.oriental.coach.net.resp.LoginResult;
 import com.oriental.coach.net.resp.SimpleResponse;
 import com.oriental.coach.net.urls.Urls;
 import com.oriental.coach.utils.PreferencesUtil;
-import com.oriental.coach.utils.ToastUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

@@ -99,7 +99,7 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
         mMessages.clear();
         Map<String, String> map = new HashMap<>();
         map.put("userId", teacherId);
-        map.put("messageTypes", "3_1");
+        map.put("likeMessageType", "3");
         ((MainActivity) getActivity()).requestGet(Urls.GET_MESSAGE, map, new DialogCallback<BaseResponse<List<MessageResult>>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<List<MessageResult>> listBaseResponse, Call call, Response response) {

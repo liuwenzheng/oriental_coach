@@ -1,6 +1,7 @@
 package com.oriental.coach.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -19,6 +20,9 @@ import com.oriental.coach.activity.CarTypeActivity;
 import com.oriental.coach.activity.SettingActivity;
 import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.net.urls.Urls;
+import com.oriental.coach.utils.LogModule;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -152,11 +156,17 @@ public class MainMyFragment extends Fragment {
 //                startActivity(intent);
 //                break;
             case R.id.ll_my_share:
-                if (!getActivity().isFinishing() && mSharePopupWindow != null && mSharePopupWindow.isShowing()) {
-                    showSharePopup(true);
-                } else {
-                    showSharePopup(false);
-                }
+//                if (!getActivity().isFinishing() && mSharePopupWindow != null && mSharePopupWindow.isShowing()) {
+//                    showSharePopup(true);
+//                } else {
+//                    showSharePopup(false);
+//                }
+                String msgTitle = "新东方驾校";
+                String msgText = "东方驾驶学院约车系统，最好的预约学车管理平台，进入网站下载：http://www.ycxdfjy.com";
+                String activityTitle = "新东方驾校";
+
+                String imgPath = "";
+                shareMsg(activityTitle, msgTitle, msgText, imgPath);
                 break;
             case R.id.ll_my_setting:
                 intent = new Intent(getActivity(), SettingActivity.class);
@@ -164,6 +174,36 @@ public class MainMyFragment extends Fragment {
                 break;
         }
     }
+
+    /**
+     * 分享功能
+     *
+     * @param activityTitle Activity的名字
+     * @param msgTitle      消息标题
+     * @param msgText       消息内容
+     * @param imgPath       图片路径，不分享图片则传null
+     */
+    public void shareMsg(String activityTitle, String msgTitle, String msgText, String imgPath) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        if (imgPath == null || imgPath.equals("")) {
+            intent.setType("text/plain"); // 纯文本
+        } else {
+            LogModule.e("获取图片的路径为：", imgPath);
+            File f = new File(imgPath);
+            if (f != null && f.exists() && f.isFile()) {
+                intent.setType("image/*");
+                Uri u = Uri.fromFile(f);
+                intent.putExtra(Intent.EXTRA_STREAM, u);
+            }
+        }
+        intent.putExtra("Kdescription", msgTitle);
+        intent.putExtra(Intent.EXTRA_SUBJECT, msgTitle);
+        intent.putExtra(Intent.EXTRA_TEXT, msgText);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, activityTitle));
+    }
+
 
     private void showSharePopup(boolean isShow) {
         if (isShow) {
