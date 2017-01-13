@@ -93,7 +93,7 @@ public class MainMyFragment extends Fragment {
             tv_my_gender.setText("2".equals(mTeacher.gender) ? "女" : "男");
             tv_my_phonenumber.setText(getString(R.string.phonenumber, mTeacher.phoneNo));
 //            if (mTeacher.goodCommPro > 0 && mTeacher.goodCommPro <= 20) {
-            rb_my_rating.setRating(mTeacher.teacharGrade);
+            rb_my_rating.setRating((float) mTeacher.teacharGrade);
 //            } else if (mTeacher.goodCommPro > 20 && mTeacher.goodCommPro <= 40) {
 //                rb_my_rating.setRating(2);
 //            } else if (mTeacher.goodCommPro > 40 && mTeacher.goodCommPro <= 60) {

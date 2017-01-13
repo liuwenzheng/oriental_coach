@@ -64,7 +64,7 @@ public class TeacherResult implements Serializable {
     public String teacharIdcard;
     public String teacharPhone;
     public int teacharCarAge;
-    public int teacharGrade;
+    public double teacharGrade;
     public String teacharLogo;
     public String proviceCode;
     public String proviceName;
