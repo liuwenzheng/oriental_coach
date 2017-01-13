@@ -283,6 +283,7 @@ public class MainActivity extends BaseActivity {
                 mTeacher.logo = result.teacharLogo;
                 mTeacher.phoneNo = result.teacharPhone;
                 mTeacher.studentCnt = result.studentCnt;
+                mTeacher.teacharGrade = result.teacharGrade;
                 mTeacher.teacharId = tableId;
                 StringBuilder builder = new StringBuilder();
                 builder.append(result.proviceName)

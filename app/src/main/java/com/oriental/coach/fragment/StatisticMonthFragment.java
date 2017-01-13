@@ -99,7 +99,7 @@ public class StatisticMonthFragment extends Fragment {
                         month.date = Utils.calendar2strDate(calendar, Constants.PATTERN_MM_DD_2);
                         month.price = result.money;
                         month.income = result.deductRatio;
-                        month.count = result.studentCnt;
+                        month.count = result.num;
                         mDatas.add(month);
                     }
                     mAdapter.setDatas(mDatas);

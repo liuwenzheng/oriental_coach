@@ -92,19 +92,19 @@ public class MainMyFragment extends Fragment {
             tv_my_name.setText(mTeacher.name);
             tv_my_gender.setText("2".equals(mTeacher.gender) ? "女" : "男");
             tv_my_phonenumber.setText(getString(R.string.phonenumber, mTeacher.phoneNo));
-            if (mTeacher.goodCommPro > 0 && mTeacher.goodCommPro <= 20) {
-                rb_my_rating.setRating(1);
-            } else if (mTeacher.goodCommPro > 20 && mTeacher.goodCommPro <= 40) {
-                rb_my_rating.setRating(2);
-            } else if (mTeacher.goodCommPro > 40 && mTeacher.goodCommPro <= 60) {
-                rb_my_rating.setRating(3);
-            } else if (mTeacher.goodCommPro > 60 && mTeacher.goodCommPro <= 80) {
-                rb_my_rating.setRating(4);
-            } else if (mTeacher.goodCommPro > 80 && mTeacher.goodCommPro <= 100) {
-                rb_my_rating.setRating(5);
-            } else {
-                rb_my_rating.setRating(0);
-            }
+//            if (mTeacher.goodCommPro > 0 && mTeacher.goodCommPro <= 20) {
+            rb_my_rating.setRating(mTeacher.teacharGrade);
+//            } else if (mTeacher.goodCommPro > 20 && mTeacher.goodCommPro <= 40) {
+//                rb_my_rating.setRating(2);
+//            } else if (mTeacher.goodCommPro > 40 && mTeacher.goodCommPro <= 60) {
+//                rb_my_rating.setRating(3);
+//            } else if (mTeacher.goodCommPro > 60 && mTeacher.goodCommPro <= 80) {
+//                rb_my_rating.setRating(4);
+//            } else if (mTeacher.goodCommPro > 80 && mTeacher.goodCommPro <= 100) {
+//                rb_my_rating.setRating(5);
+//            } else {
+//                rb_my_rating.setRating(0);
+//            }
             tv_my_driving_years.setText(mTeacher.carAge + "");
             tv_my_student_total.setText(mTeacher.studentCnt + "");
             tv_my_feedback_rate.setText(mTeacher.goodCommPro + "");

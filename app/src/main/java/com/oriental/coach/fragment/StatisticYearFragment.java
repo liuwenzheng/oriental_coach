@@ -94,7 +94,7 @@ public class StatisticYearFragment extends Fragment {
                         year.month = result.time + "";
                         year.price = result.money;
                         year.income = result.deductRatio;
-                        year.count = result.studentCnt;
+                        year.count = result.num;
                         mDatas.add(year);
                     }
                     mAdapter.setDatas(mDatas);

@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.oriental.coach.net.resp.CarResult;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +38,8 @@ public class Teacher implements Parcelable {
     public List<CarResult> carResults;
     // 教练id
     public String teacharId;
+    // 教练评分
+    public int teacharGrade;
 
 
     @Override
@@ -60,6 +61,7 @@ public class Teacher implements Parcelable {
         dest.writeString(this.address);
         dest.writeTypedList(this.carResults);
         dest.writeString(this.teacharId);
+        dest.writeInt(this.teacharGrade);
     }
 
     public Teacher() {
@@ -78,6 +80,7 @@ public class Teacher implements Parcelable {
         this.address = in.readString();
         this.carResults = in.createTypedArrayList(CarResult.CREATOR);
         this.teacharId = in.readString();
+        this.teacharGrade = in.readInt();
     }
 
     public static final Creator<Teacher> CREATOR = new Creator<Teacher>() {
