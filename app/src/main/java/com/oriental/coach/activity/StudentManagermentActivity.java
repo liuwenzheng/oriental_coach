@@ -105,8 +105,10 @@ public class StudentManagermentActivity extends BaseActivity {
                             subject = "科目二普通";
                         } else if ("2".equals(result.courseType)) {
                             subject = "科目二场内";
-                        } else {
+                        } else if ("3".equals(result.courseType)) {
                             subject = "科目三";
+                        } else {
+                            subject = "";
                         }
                         student.subject = subject;
                         if (!TextUtils.isEmpty(result.studentLogo)) {
