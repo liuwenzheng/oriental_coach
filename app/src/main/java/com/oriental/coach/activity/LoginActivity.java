@@ -1,7 +1,12 @@
 package com.oriental.coach.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,10 +43,37 @@ public class LoginActivity extends BaseActivity {
     EditText etAccounts;
     @Bind(R.id.et_password)
     EditText etPassword;
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE: {
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        ToastUtils.showToast(LoginActivity.this, "This app needs these permissions!");
+                        LoginActivity.this.finish();
+                        return;
+                    }
+                }
+                initContentView();
+            }
+        }
+    }
+
+    private void initContentView() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         String teacherId = PreferencesUtil.getStringByName(LoginActivity.this, "teacherId", "");
@@ -53,7 +85,6 @@ public class LoginActivity extends BaseActivity {
             gotoMainActivity();
         }
     }
-
 
     @OnClick({R.id.btn_login})
     public void onClick(View view) {
