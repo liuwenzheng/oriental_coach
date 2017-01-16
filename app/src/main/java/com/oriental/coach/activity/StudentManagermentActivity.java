@@ -100,15 +100,13 @@ public class StudentManagermentActivity extends BaseActivity {
                         student.gender = result.studentSex;
                         student.phonenumber = result.studentPhone;
                         student.identityCard = result.studentIdcard;
-                        String subject;
+                        String subject = "";
                         if ("1".equals(result.courseType)) {
                             subject = "科目二普通";
                         } else if ("2".equals(result.courseType)) {
                             subject = "科目二场内";
                         } else if ("3".equals(result.courseType)) {
                             subject = "科目三";
-                        } else {
-                            subject = "";
                         }
                         student.subject = subject;
                         if (!TextUtils.isEmpty(result.studentLogo)) {

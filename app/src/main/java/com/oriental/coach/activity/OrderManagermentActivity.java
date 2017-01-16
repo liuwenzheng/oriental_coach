@@ -120,12 +120,12 @@ public class OrderManagermentActivity extends BaseActivity {
                             }
                         }
                         entity.orderStatus = result.bespeakState;
-                        String subject;
+                        String subject = "";
                         if ("1".equals(result.timeSourse)) {
                             subject = "科目二普通";
                         } else if ("2".equals(result.timeSourse)) {
                             subject = "科目二场内";
-                        } else {
+                        } else if ("3".equals(result.timeSourse)) {
                             subject = "科目三";
                         }
                         entity.subject = subject;

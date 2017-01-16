@@ -144,12 +144,12 @@ public class DailyPlanActivity extends BaseActivity {
                         DailyPlan plan = new DailyPlan();
                         plan.duration = String.format("%s-%s", result.timeBeginTime, result.timeEndTime);
                         plan.licenseLevel = result.timeLicense;
-                        String subject;
+                        String subject = "";
                         if ("1".equals(result.timeSourse)) {
                             subject = "科目二普通";
                         } else if ("2".equals(result.timeSourse)) {
                             subject = "科目二场内";
-                        } else {
+                        } else if ("3".equals(result.timeSourse)){
                             subject = "科目三";
                         }
                         plan.subject = subject;
