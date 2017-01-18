@@ -34,6 +34,7 @@ import com.oriental.coach.net.urls.Urls;
 import com.oriental.coach.utils.LogModule;
 import com.oriental.coach.utils.PreferencesUtil;
 import com.oriental.coach.utils.ToastUtils;
+import com.oriental.coach.utils.Utils;
 import com.oriental.coach.version.DownLoadAsyncTask;
 import com.oriental.coach.version.GetServerUrl;
 import com.oriental.coach.version.UpdateInfo;
@@ -167,7 +168,7 @@ public class MainActivity extends BaseActivity {
                     InputStream is = conn.getInputStream();
                     //解析xml文件封装成对象
                     info = UpdateInfoService.getUpdataInfo(is);
-                    if (info.getVersion().equals(getVersionName())) {
+                    if (info.getVersion().equals(Utils.getVersionName(MainActivity.this))) {
                         LogModule.i("版本号相同无需升级");
                         handler.sendEmptyMessageDelayed(3, 800);
                     } else {
@@ -252,16 +253,7 @@ public class MainActivity extends BaseActivity {
         downLoad.execute(info.getUrl());
     }
 
-    /*
-       * 获取当前程序的版本号
-       */
-    private String getVersionName() throws Exception {
-        //获取packagemanager的实例
-        PackageManager packageManager = getPackageManager();
-        //getPackageName()是你当前类的包名，0代表是获取版本信息
-        PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
-        return packInfo.versionName;
-    }
+
 
 
     private Teacher mTeacher;

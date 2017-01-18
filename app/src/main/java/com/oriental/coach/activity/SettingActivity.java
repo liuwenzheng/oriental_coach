@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.oriental.coach.R;
 import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.utils.PreferencesUtil;
+import com.oriental.coach.utils.Utils;
 import com.zcw.togglebutton.ToggleButton;
 
 import butterknife.Bind;
@@ -27,6 +28,8 @@ public class SettingActivity extends BaseActivity {
     TextView tvHeaderTitle;
     @Bind(R.id.tb_switch)
     ToggleButton tbSwitch;
+    @Bind(R.id.tv_version)
+    TextView tvVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,11 @@ public class SettingActivity extends BaseActivity {
 
             }
         });
+        try {
+            tvVersion.setText(Utils.getVersionName(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick({R.id.iv_header_back, R.id.btn_logout, R.id.rl_modify_password})
