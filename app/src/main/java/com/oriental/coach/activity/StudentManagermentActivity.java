@@ -1,24 +1,19 @@
 package com.oriental.coach.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.StudentManagermentAdapter;
 import com.oriental.coach.base.BaseActivity;
-import com.oriental.coach.entity.DailyPlan;
 import com.oriental.coach.entity.Student;
 import com.oriental.coach.entity.Teacher;
 import com.oriental.coach.net.callback.DialogCallback;
-import com.oriental.coach.net.resp.AppointmentResult;
 import com.oriental.coach.net.resp.BaseResponse;
 import com.oriental.coach.net.resp.StudentResult;
 import com.oriental.coach.net.urls.Urls;
@@ -32,7 +27,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import info.hoang8f.android.segmented.SegmentedGroup;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -102,11 +96,13 @@ public class StudentManagermentActivity extends BaseActivity {
                         student.identityCard = result.studentIdcard;
                         String subject = "";
                         if ("1".equals(result.courseType)) {
-                            subject = "科目二普通";
+                            subject = "科目一";
                         } else if ("2".equals(result.courseType)) {
-                            subject = "科目二场内";
+                            subject = "科目二";
                         } else if ("3".equals(result.courseType)) {
                             subject = "科目三";
+                        } else if ("4".equals(result.courseType)) {
+                            subject = "科目四";
                         }
                         student.subject = subject;
                         if (!TextUtils.isEmpty(result.studentLogo)) {

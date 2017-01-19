@@ -19,6 +19,7 @@ import com.oriental.coach.activity.MainActivity;
 import com.oriental.coach.adapter.OrderMessageAdapter;
 import com.oriental.coach.entity.OrderMessage;
 import com.oriental.coach.net.callback.DialogCallback;
+import com.oriental.coach.net.callback.JsonCallback;
 import com.oriental.coach.net.resp.BaseResponse;
 import com.oriental.coach.net.resp.MessageResult;
 import com.oriental.coach.net.urls.Urls;
@@ -57,6 +58,8 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
     private boolean mCanSelect;
     private OrderMessageAdapter mAdapter;
     private List<OrderMessage> mMessages;
+    private MainActivity mActivity;
+    private String mTeacherId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +79,7 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
     }
 
     private void initData() {
+        mActivity = (MainActivity) getActivity();
         mMessages = new ArrayList<>();
         mAdapter = new OrderMessageAdapter(getActivity(), mMessages, this);
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,14 +99,14 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
     }
 
     private void createData() {
-        final String teacherId = PreferencesUtil.getStringByName(getActivity(), "teacherId", "");
-        mMessages.clear();
+        mTeacherId = PreferencesUtil.getStringByName(getActivity(), "teacherId", "");
         Map<String, String> map = new HashMap<>();
-        map.put("userId", teacherId);
+        map.put("userId", mTeacherId);
         map.put("likeMessageType", "3");
         ((MainActivity) getActivity()).requestGet(Urls.GET_MESSAGE, map, new DialogCallback<BaseResponse<List<MessageResult>>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<List<MessageResult>> listBaseResponse, Call call, Response response) {
+                mMessages.clear();
                 List<MessageResult> results = listBaseResponse.resObject;
                 if (results != null && !results.isEmpty()) {
                     for (int i = 0; i < results.size(); i++) {
@@ -132,8 +136,6 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
                 mAdapter.notifyDataSetChanged();
             }
         });
-
-
     }
 
     @Override
@@ -247,6 +249,7 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
                 ToastUtils.showToast(getActivity(), "已阅读");
                 message.msgStatus = "1";
                 mAdapter.notifyDataSetChanged();
+                requestMessageCount();
             }
 
             @Override
@@ -254,6 +257,22 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
                 super.onError(call, response, e);
                 if (e instanceof IllegalStateException) {
                     ToastUtils.showToast(getActivity(), e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void requestMessageCount() {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", mTeacherId);
+        mActivity.requestGet(Urls.GET_MESSAGE_COUNT, map, new JsonCallback<BaseResponse<Object>>(mActivity) {
+            @Override
+            public void onSuccess(BaseResponse<Object> baseResponse, Call call, Response response) {
+                double count = (double) baseResponse.resObject;
+                if (count > 0) {
+                    mActivity.ivUnread.setVisibility(View.VISIBLE);
+                } else {
+                    mActivity.ivUnread.setVisibility(View.GONE);
                 }
             }
         });

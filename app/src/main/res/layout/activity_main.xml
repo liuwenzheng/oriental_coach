@@ -14,59 +14,74 @@
 
     <View style="@style/divider_line" />
 
-    <RadioGroup
-        android:id="@+id/rg_main"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white_ffffff"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rb_main_home"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/rg_main"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:button="@null"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/selector_rb_main_home"
-            android:gravity="center_horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/main_tab_home"
-            android:textColor="@drawable/selector_rb_common_text_grey"
-            android:textSize="11sp" />
+            android:background="@color/white_ffffff"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rb_main_message"
-            android:layout_width="0dp"
+            <RadioButton
+                android:id="@+id/rb_main_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/selector_rb_main_home"
+                android:gravity="center_horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/main_tab_home"
+                android:textColor="@drawable/selector_rb_common_text_grey"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_main_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/selector_rb_main_message"
+                android:gravity="center_horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/main_tab_message"
+                android:textColor="@drawable/selector_rb_common_text_grey"
+                android:textSize="11sp" />
+
+
+            <RadioButton
+                android:id="@+id/rb_main_my"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/selector_rb_main_my"
+                android:gravity="center_horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/main_tab_my"
+                android:textColor="@drawable/selector_rb_common_text_grey"
+                android:textSize="11sp" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_unread"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:button="@null"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/selector_rb_main_message"
-            android:gravity="center_horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/main_tab_message"
-            android:textColor="@drawable/selector_rb_common_text_grey"
-            android:textSize="11sp" />
-
-        <RadioButton
-            android:id="@+id/rb_main_my"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:button="@null"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/selector_rb_main_my"
-            android:gravity="center_horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/main_tab_my"
-            android:textColor="@drawable/selector_rb_common_text_grey"
-            android:textSize="11sp" />
-    </RadioGroup>
-
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/shape_corners_unread_red"
+            android:visibility="gone" />
+    </FrameLayout>
     <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

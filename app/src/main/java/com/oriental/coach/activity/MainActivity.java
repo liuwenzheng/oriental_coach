@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +13,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -27,6 +27,7 @@ import com.oriental.coach.fragment.MainCoachFragment;
 import com.oriental.coach.fragment.MainMessageFragment;
 import com.oriental.coach.fragment.MainMyFragment;
 import com.oriental.coach.net.callback.DialogCallback;
+import com.oriental.coach.net.callback.JsonCallback;
 import com.oriental.coach.net.resp.BaseResponse;
 import com.oriental.coach.net.resp.CarResult;
 import com.oriental.coach.net.resp.TeacherResult;
@@ -70,6 +71,7 @@ public class MainActivity extends BaseActivity {
     RadioButton rbMainMy;
     @Bind(R.id.rg_main)
     RadioGroup rgMain;
+    public ImageView ivUnread;
     // private Bundle mDatas;
     private MyHandler handler;
 
@@ -118,6 +120,7 @@ public class MainActivity extends BaseActivity {
         if (savedInstanceState != null) {
             return;
         }
+        ivUnread = ButterKnife.findById(this, R.id.iv_unread);
 //        mDatas = new Bundle();
 //        mDatas.putParcelable("teacher", mTeacher);
         mFragmentManager = getSupportFragmentManager();
@@ -254,12 +257,11 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
-
     private Teacher mTeacher;
+    private int mCount = 3;
 
     private void requestTeacher(final String tableId) {
-        Map<String, String> req = new HashMap<>();
+        final Map<String, String> req = new HashMap<>();
         req.put("teacharId", tableId);
         requestGet(Urls.GET_TEACHER, req, new DialogCallback<BaseResponse<TeacherResult>>(this, false) {
             @Override
@@ -293,14 +295,33 @@ public class MainActivity extends BaseActivity {
                 if (e instanceof IllegalStateException) {
                     ToastUtils.showToast(MainActivity.this, e.getMessage());
                 } else {
-                    ToastUtils.showToast(MainActivity.this, "网络错误");
-                    finish();
+                    mCount--;
+                    if (mCount > 0) {
+                        requestTeacher(tableId);
+                        return;
+                    }
+                    AlertDialog.Builder builer = new AlertDialog.Builder(MainActivity.this);
+                    builer.setMessage("网络错误，请重新获取数据");
+                    builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            requestTeacher(tableId);
+                        }
+                    });
+                    builer.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            MainActivity.this.finish();
+                        }
+                    });
+                    AlertDialog dialog = builer.create();
+                    dialog.setCancelable(false);//点击屏幕和物理返回键dialog不消失
+                    dialog.show();
                 }
             }
         });
     }
 
-    private void requestCar(String tableId) {
+    private void requestCar(final String tableId) {
         Map<String, String> req = new HashMap<>();
         req.put("teacherId", tableId);
         requestGet(Urls.GET_TEACHER_CAR, req, new DialogCallback<BaseResponse<List<CarResult>>>(this, false) {
@@ -311,6 +332,7 @@ public class MainActivity extends BaseActivity {
                 ((MainCoachFragment) mMainCoachFrament).setTeacher(mTeacher);
                 ((MainCoachFragment) mMainCoachFrament).refreshView();
                 ((MainMyFragment) mMainMyFragment).setTeacher(mTeacher);
+                requestMessageCount(tableId);
             }
 
             @Override
@@ -319,12 +341,53 @@ public class MainActivity extends BaseActivity {
                 if (e instanceof IllegalStateException) {
                     ToastUtils.showToast(MainActivity.this, e.getMessage());
                 } else {
-                    ToastUtils.showToast(MainActivity.this, "网络错误");
-                    finish();
+                    AlertDialog.Builder builer = new AlertDialog.Builder(MainActivity.this);
+                    builer.setMessage("网络错误，请重新获取数据");
+                    builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            requestCar(tableId);
+                        }
+                    });
+                    builer.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            MainActivity.this.finish();
+                        }
+                    });
+                    AlertDialog dialog = builer.create();
+                    dialog.setCancelable(false);//点击屏幕和物理返回键dialog不消失
+                    dialog.show();
                 }
             }
         });
     }
+
+    private void requestMessageCount(String tableId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", tableId);
+        requestGet(Urls.GET_MESSAGE_COUNT, map, new JsonCallback<BaseResponse<Object>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<Object> baseResponse, Call call, Response response) {
+                double count = (double) baseResponse.resObject;
+                if (count > 0) {
+                    ivUnread.setVisibility(View.VISIBLE);
+                } else {
+                    ivUnread.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (e instanceof IllegalStateException) {
+                    ToastUtils.showToast(MainActivity.this, e.getMessage());
+                } else {
+                    // requestMessageCount(tableId);
+                }
+            }
+        });
+    }
+
 
 //    private void selectedIcon() {
 //        if (mCurrentFragment == mMainCoachFrament) {
