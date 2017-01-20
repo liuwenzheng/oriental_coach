@@ -2,6 +2,7 @@ package com.oriental.coach.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.oriental.coach.R;
 import com.oriental.coach.activity.DailyPlanActivity;
 import com.oriental.coach.activity.OrderManagermentActivity;
@@ -88,9 +90,29 @@ public class MainCoachFragment extends Fragment {
             tvCoachSchool.setText(mTeacher.school);
             tvCoachDrivingYears.setText(getString(R.string.driving_years, String.valueOf(mTeacher.carAge)));
             if (!TextUtils.isEmpty(mTeacher.logo)) {
-                ImageLoader.getInstance().displayImage(Urls.SERVER_IMAGE + mTeacher.logo, civMyHeader);
+                ImageLoader.getInstance().displayImage(Urls.SERVER_IMAGE + mTeacher.logo, civMyHeader, new SimpleImageLoadingListener() {
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        civMyHeader.setImageBitmap(ImageCrop(loadedImage));
+                    }
+
+
+                });
             }
         }
+    }
+
+    /**
+     * 按正方形裁切图片
+     */
+    public static Bitmap ImageCrop(Bitmap bitmap) {
+        int w = bitmap.getWidth(); // 得到图片的宽，高
+        int h = bitmap.getHeight();
+
+        int wh = w > h ? h : w;// 裁切后所取的正方形区域边长
+
+        //下面这句是关键
+        return Bitmap.createBitmap(bitmap, 0, 10, wh, wh, null, false);
     }
 
     @Override
