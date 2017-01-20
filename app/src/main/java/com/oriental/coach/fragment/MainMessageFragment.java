@@ -270,9 +270,10 @@ public class MainMessageFragment extends Fragment implements OrderMessageAdapter
             public void onSuccess(BaseResponse<Object> baseResponse, Call call, Response response) {
                 double count = (double) baseResponse.resObject;
                 if (count > 0) {
-                    mActivity.ivUnread.setVisibility(View.VISIBLE);
+                    mActivity.tv_unread.setVisibility(View.VISIBLE);
+                    mActivity.tv_unread.setText(((int) count) + "");
                 } else {
-                    mActivity.ivUnread.setVisibility(View.GONE);
+                    mActivity.tv_unread.setVisibility(View.GONE);
                 }
             }
         });

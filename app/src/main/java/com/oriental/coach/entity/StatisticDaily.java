@@ -11,7 +11,7 @@ public class StatisticDaily {
     // 预约价格
     public double price;
     // 抽成
-    public String income;
+    public double income;
     // 预约时间
     public String time;
 }

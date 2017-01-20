@@ -14,9 +14,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oriental.coach.R;
@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
     RadioButton rbMainMy;
     @Bind(R.id.rg_main)
     RadioGroup rgMain;
-    public ImageView ivUnread;
+    public TextView tv_unread;
     // private Bundle mDatas;
     private MyHandler handler;
 
@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity {
         if (savedInstanceState != null) {
             return;
         }
-        ivUnread = ButterKnife.findById(this, R.id.iv_unread);
+        tv_unread = ButterKnife.findById(this, R.id.tv_unread);
 //        mDatas = new Bundle();
 //        mDatas.putParcelable("teacher", mTeacher);
         mFragmentManager = getSupportFragmentManager();
@@ -370,9 +370,10 @@ public class MainActivity extends BaseActivity {
             public void onSuccess(BaseResponse<Object> baseResponse, Call call, Response response) {
                 double count = (double) baseResponse.resObject;
                 if (count > 0) {
-                    ivUnread.setVisibility(View.VISIBLE);
+                    tv_unread.setVisibility(View.VISIBLE);
+                    tv_unread.setText(((int) count)+"");
                 } else {
-                    ivUnread.setVisibility(View.GONE);
+                    tv_unread.setVisibility(View.GONE);
                 }
             }
 

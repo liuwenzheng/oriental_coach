@@ -3,6 +3,7 @@ package com.oriental.coach.adapter;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class StatisticDailyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         holder.tvName.setText(daily.name);
         holder.tvPrice.setText(daily.price + "");
-        holder.tvIncome.setText(daily.income);
+        holder.tvIncome.setText(daily.income + "");
         holder.tvTime.setText(daily.time);
     }
 

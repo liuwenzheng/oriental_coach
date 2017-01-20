@@ -71,7 +71,7 @@ public class BespeakResult implements Serializable {
     public String tradeType;
     public String tradeCode;
     public String takeMoney;
-    public String takeRatio;
+    public double takeRatio;
     public String schoolId;
     public String schoolName;
 }
