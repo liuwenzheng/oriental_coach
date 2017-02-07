@@ -30,6 +30,8 @@
         <activity android:name=".activity.CarTypeActivity"></activity>
         <activity android:name=".activity.CarRecordActivity"></activity>
         <activity android:name=".activity.OrderMessageActivity"></activity>
+        <activity android:name=".activity.GetVerificationCodeActivity"></activity>
+        <activity android:name=".activity.UpdatePasswordActivity"></activity>
     </application>
 
 </manifest>

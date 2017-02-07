@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_login})
+    @OnClick({R.id.btn_login, R.id.btn_forget_password})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -102,6 +102,10 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 requestLogin();
+                break;
+            case R.id.btn_forget_password:
+                Intent intent = new Intent(this, GetVerificationCodeActivity.class);
+                startActivity(intent);
                 break;
         }
     }
