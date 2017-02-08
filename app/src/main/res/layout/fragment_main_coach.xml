@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="220dp"
         android:background="@color/blue_4c6f98">
 
         <TextView
@@ -80,84 +79,102 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="360dp"
-        android:layout_height="360dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
         android:padding="10dp">
 
-        <FrameLayout
-            android:id="@+id/fl_student"
-            android:layout_width="165dp"
-            android:layout_height="165dp"
-            android:background="@color/white_ffffff">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/student_managerment_icon"
-                android:gravity="center"
-                android:text="@string/student_managerment"
-                android:textColor="@color/black_333333" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_student"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:background="@color/white_ffffff">
 
-        <FrameLayout
-            android:id="@+id/fl_daily"
-            android:layout_width="165dp"
-            android:layout_height="165dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/fl_student"
-            android:background="@color/white_ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/student_managerment_icon"
+                    android:gravity="center"
+                    android:text="@string/student_managerment"
+                    android:textColor="@color/black_333333" />
+            </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/daily_plan_icon"
-                android:gravity="center"
-                android:text="@string/daily_plan"
-                android:textColor="@color/black_333333" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_daily"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/fl_student"
+                android:layout_weight="1.0"
+                android:background="@color/white_ffffff">
 
-        <FrameLayout
-            android:id="@+id/fl_orders"
-            android:layout_width="165dp"
-            android:layout_height="165dp"
-            android:layout_below="@id/fl_student"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/daily_plan_icon"
+                    android:gravity="center"
+                    android:text="@string/daily_plan"
+                    android:textColor="@color/black_333333" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:background="@color/white_ffffff">
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/orders_managerment_icon"
-                android:gravity="center"
-                android:text="@string/orders_managerment"
-                android:textColor="@color/black_333333" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_orders"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:background="@color/white_ffffff">
 
-        <FrameLayout
-            android:id="@+id/fl_statistic"
-            android:layout_width="165dp"
-            android:layout_height="165dp"
-            android:layout_alignLeft="@id/fl_daily"
-            android:layout_below="@id/fl_daily"
-            android:layout_marginTop="10dp"
-            android:background="@color/white_ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/orders_managerment_icon"
+                    android:gravity="center"
+                    android:text="@string/orders_managerment"
+                    android:textColor="@color/black_333333" />
+            </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/statistic_managerment_icon"
-                android:gravity="center"
-                android:text="@string/statistic_managerment"
-                android:textColor="@color/black_333333" />
-        </FrameLayout>
-    </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/fl_statistic"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@id/fl_daily"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1.0"
+                android:background="@color/white_ffffff">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/statistic_managerment_icon"
+                    android:gravity="center"
+                    android:text="@string/statistic_managerment"
+                    android:textColor="@color/black_333333" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
