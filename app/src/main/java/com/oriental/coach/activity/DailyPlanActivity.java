@@ -8,12 +8,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.oriental.coach.Constants;
 import com.oriental.coach.R;
 import com.oriental.coach.adapter.DailyPlanAdapter;
 import com.oriental.coach.base.BaseActivity;
 import com.oriental.coach.entity.DailyPlan;
 import com.oriental.coach.entity.Teacher;
+import com.oriental.coach.net.Convert;
 import com.oriental.coach.net.callback.DialogCallback;
 import com.oriental.coach.net.resp.AppointmentResult;
 import com.oriental.coach.net.resp.BaseResponse;
@@ -143,18 +145,8 @@ public class DailyPlanActivity extends BaseActivity {
                     for (AppointmentResult result : results) {
                         DailyPlan plan = new DailyPlan();
                         plan.duration = String.format("%s-%s", result.timeBeginTime, result.timeEndTime);
-                        plan.licenseLevel = result.timeLicense;
-                        String subject = "";
-                        if ("1".equals(result.timeSourse)) {
-                            subject = "科目二普通";
-                        } else if ("2".equals(result.timeSourse)) {
-                            subject = "科目二场内";
-                        } else if ("3".equals(result.timeSourse)){
-                            subject = "科目三";
-                        }
-                        plan.subject = subject;
-                        plan.price = String.valueOf(result.timeMondy);
-                        String status = null;
+
+                        String status;
                         if ("0".equals(result.timeOff)) {
                             status = "不可预约";
                         } else if ("1".equals(result.timeState)) {
@@ -163,6 +155,31 @@ public class DailyPlanActivity extends BaseActivity {
                             status = "可预约";
                         }
                         plan.status = status;
+                        if ("1".equals(result.timeOff) && "1".equals(result.timeState)) {
+                            String subject = "";
+                            if ("1".equals(result.timeSourse)) {
+                                subject = "科目二普通";
+                            } else if ("2".equals(result.timeSourse)) {
+                                subject = "科目二场内";
+                            } else if ("3".equals(result.timeSourse)) {
+                                subject = "科目三";
+                            }
+                            plan.subject = String.format("%s%s(￥%s)", result.timeLicense, subject, result.timeMondy);
+                        } else {
+                            List<AppointmentResult.TimeJson> timeJsons =
+                                    Convert.fromJson(result.timeJson,
+                                            new TypeToken<List<AppointmentResult.TimeJson>>() {
+                                            }.getType());
+                            StringBuilder sb = new StringBuilder();
+                            for (int i = 0; i < timeJsons.size(); i++) {
+
+                                sb.append(timeJsons.get(i).timeText);
+                                if (i != timeJsons.size() - 1) {
+                                    sb.append("\n");
+                                }
+                            }
+                            plan.subject = sb.toString();
+                        }
                         mDatas.add(plan);
                     }
                     mAdapter.setDatas(mDatas);

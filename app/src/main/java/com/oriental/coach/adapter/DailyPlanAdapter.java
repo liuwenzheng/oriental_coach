@@ -52,9 +52,7 @@ public class DailyPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         }
         holder.tvDuration.setText(plan.duration);
-        holder.tvLicenseLevel.setText(plan.licenseLevel);
         holder.tvSubject.setText(plan.subject);
-        holder.tvPrice.setText(plan.price);
         holder.tvStatus.setText(plan.status);
     }
 
@@ -66,12 +64,8 @@ public class DailyPlanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     static class MyViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.tv_duration)
         TextView tvDuration;
-        @Bind(R.id.tv_license_level)
-        TextView tvLicenseLevel;
         @Bind(R.id.tv_subject)
         TextView tvSubject;
-        @Bind(R.id.tv_price)
-        TextView tvPrice;
         @Bind(R.id.tv_status)
         TextView tvStatus;
         @Bind(R.id.ll_parent)

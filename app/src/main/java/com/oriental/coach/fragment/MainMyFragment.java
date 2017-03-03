@@ -182,7 +182,7 @@ public class MainMyFragment extends Fragment {
 //                    showSharePopup(false);
 //                }
                 String msgTitle = "新东方驾校";
-                String msgText = "东方驾驶学院约车系统，最好的预约学车管理平台，进入网站下载：http://www.ycxdfjy.com";
+                String msgText = "东方驾驶学院约车系统，最好的预约学车管理平台，进入网站下载：http://www.ycxdfjy.com/drivers-school-main/download.jsp?pageType=teacher";
                 String activityTitle = "新东方驾校";
 
                 String imgPath = "";
