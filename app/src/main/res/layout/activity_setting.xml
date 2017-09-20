@@ -111,7 +111,7 @@
         android:layout_marginTop="25dp"
         android:background="@color/red_d05450"
         android:gravity="center"
-        android:text="注销登陆"
+        android:text="注销登录"
         android:textColor="@color/white_ffffff"
         android:textSize="16sp" />
 </LinearLayout>

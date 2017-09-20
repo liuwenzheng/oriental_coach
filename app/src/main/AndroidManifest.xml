@@ -32,6 +32,7 @@
         <activity android:name=".activity.OrderMessageActivity"></activity>
         <activity android:name=".activity.GetVerificationCodeActivity"></activity>
         <activity android:name=".activity.UpdatePasswordActivity"></activity>
+        <activity android:name=".activity.AssembleTrainActivity"></activity>
     </application>
 
 </manifest>

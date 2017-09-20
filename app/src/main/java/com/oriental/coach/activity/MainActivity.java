@@ -47,6 +47,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -273,12 +274,13 @@ public class MainActivity extends BaseActivity {
                 mTeacher.school = result.schoolName;
                 mTeacher.courseType = result.courseType;
                 mTeacher.gender = result.teacharSex;
-                mTeacher.goodCommPro = result.goodCommPro;
+                mTeacher.goodCommPro = new DecimalFormat("#0.0").format(result.goodCommPro);
                 mTeacher.logo = result.teacharLogo;
                 mTeacher.phoneNo = result.teacharPhone;
                 mTeacher.studentCnt = result.studentCnt;
                 mTeacher.teacharGrade = result.teacharGrade;
                 mTeacher.teacharId = tableId;
+                mTeacher.teacharJobType = TextUtils.isEmpty(result.teacharJobType) ? 0 : Integer.parseInt(result.teacharJobType);
                 StringBuilder builder = new StringBuilder();
                 builder.append(result.proviceName)
                         .append(result.citeName)
@@ -371,7 +373,7 @@ public class MainActivity extends BaseActivity {
                 double count = (double) baseResponse.resObject;
                 if (count > 0) {
                     tv_unread.setVisibility(View.VISIBLE);
-                    tv_unread.setText(((int) count)+"");
+                    tv_unread.setText(((int) count) + "");
                 } else {
                     tv_unread.setVisibility(View.GONE);
                 }

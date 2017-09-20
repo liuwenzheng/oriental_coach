@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.oriental.coach.R;
+import com.oriental.coach.activity.AssembleTrainActivity;
 import com.oriental.coach.activity.DailyPlanActivity;
 import com.oriental.coach.activity.OrderManagermentActivity;
 import com.oriental.coach.activity.StatisticManagermentActivity;
@@ -38,6 +39,8 @@ public class MainCoachFragment extends Fragment {
     TextView tvCoachDrivingYears;
     @Bind(R.id.tv_coach_school)
     TextView tvCoachSchool;
+    @Bind(R.id.tv_daily)
+    TextView tvDaily;
 
     private Teacher mTeacher;
 
@@ -89,6 +92,7 @@ public class MainCoachFragment extends Fragment {
             tvMyName.setText(mTeacher.name);
             tvCoachSchool.setText(mTeacher.school);
             tvCoachDrivingYears.setText(getString(R.string.driving_years, String.valueOf(mTeacher.carAge)));
+            tvDaily.setText(mTeacher.teacharJobType == 2 ? "集训日程" : "记时日程");
             if (!TextUtils.isEmpty(mTeacher.logo)) {
                 ImageLoader.getInstance().displayImage(Urls.SERVER_IMAGE + mTeacher.logo, civMyHeader, new SimpleImageLoadingListener() {
                     @Override
@@ -168,9 +172,15 @@ public class MainCoachFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.fl_daily:
-                intent = new Intent(getActivity(), DailyPlanActivity.class);
-                intent.putExtra("teacher", mTeacher);
-                startActivity(intent);
+                if (mTeacher.teacharJobType == 2) {
+                    intent = new Intent(getActivity(), AssembleTrainActivity.class);
+                    intent.putExtra("teacher", mTeacher);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(getActivity(), DailyPlanActivity.class);
+                    intent.putExtra("teacher", mTeacher);
+                    startActivity(intent);
+                }
                 break;
             case R.id.fl_orders:
                 intent = new Intent(getActivity(), OrderManagermentActivity.class);

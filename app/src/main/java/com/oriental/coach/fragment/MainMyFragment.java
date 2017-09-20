@@ -101,7 +101,7 @@ public class MainMyFragment extends Fragment {
 //            } else if (mTeacher.goodCommPro > 40 && mTeacher.goodCommPro <= 60) {
 //                rb_my_rating.setRating(3);
 //            } else if (mTeacher.goodCommPro > 60 && mTeacher.goodCommPro <= 80) {
-//                rb_my_rating.setRating(4);
+//                rb_my_rating.setRating(4)f;
 //            } else if (mTeacher.goodCommPro > 80 && mTeacher.goodCommPro <= 100) {
 //                rb_my_rating.setRating(5);
 //            } else {
@@ -109,7 +109,7 @@ public class MainMyFragment extends Fragment {
 //            }
             tv_my_driving_years.setText(mTeacher.carAge + "");
             tv_my_student_total.setText(mTeacher.studentCnt + "");
-            tv_my_feedback_rate.setText(mTeacher.goodCommPro + "");
+            tv_my_feedback_rate.setText(mTeacher.goodCommPro);
             if (!TextUtils.isEmpty(mTeacher.courseType)) {
                 String[] s = mTeacher.courseType.split(",");
                 StringBuilder builder = new StringBuilder();

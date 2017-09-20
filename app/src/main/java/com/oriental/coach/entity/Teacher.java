@@ -29,7 +29,7 @@ public class Teacher implements Parcelable {
     // 学生数量
     public int studentCnt;
     // 好评率
-    public double goodCommPro;
+    public String goodCommPro;
     // 培训科目
     public String courseType;
     // 教练地址
@@ -40,6 +40,8 @@ public class Teacher implements Parcelable {
     public String teacharId;
     // 教练评分
     public double teacharGrade;
+    // 教练类型
+    public int teacharJobType;
 
 
     @Override
@@ -56,12 +58,13 @@ public class Teacher implements Parcelable {
         dest.writeString(this.gender);
         dest.writeString(this.logo);
         dest.writeInt(this.studentCnt);
-        dest.writeDouble(this.goodCommPro);
+        dest.writeString(this.goodCommPro);
         dest.writeString(this.courseType);
         dest.writeString(this.address);
         dest.writeTypedList(this.carResults);
         dest.writeString(this.teacharId);
         dest.writeDouble(this.teacharGrade);
+        dest.writeInt(this.teacharJobType);
     }
 
     public Teacher() {
@@ -75,12 +78,13 @@ public class Teacher implements Parcelable {
         this.gender = in.readString();
         this.logo = in.readString();
         this.studentCnt = in.readInt();
-        this.goodCommPro = in.readDouble();
+        this.goodCommPro = in.readString();
         this.courseType = in.readString();
         this.address = in.readString();
         this.carResults = in.createTypedArrayList(CarResult.CREATOR);
         this.teacharId = in.readString();
         this.teacharGrade = in.readDouble();
+        this.teacharJobType = in.readInt();
     }
 
     public static final Creator<Teacher> CREATOR = new Creator<Teacher>() {

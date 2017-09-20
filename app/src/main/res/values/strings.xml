@@ -4,7 +4,7 @@
     <string name="main_tab_message">消息</string>
     <string name="main_tab_my">我的</string>
     <string name="student_managerment">学员管理</string>
-    <string name="daily_plan">日程安排</string>
+    <string name="daily_plan">记时日程</string>
     <string name="orders_managerment">订单管理</string>
     <string name="statistic_managerment">统计管理</string>
     <string name="my_signature">个性签名</string>

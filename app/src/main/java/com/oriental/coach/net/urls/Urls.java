@@ -6,10 +6,10 @@ package com.oriental.coach.net.urls;
  */
 
 public class Urls {
-//        public static final String SERVER = "http://china-wx.wicp.net/drivers-app-main/";
-//    public static final String SERVER_IMAGE = "http://china-wx.wicp.net/drivers-school-main";
-    public static final String SERVER = "http://www.ycxdfjy.com:8888/drivers-app-main/";
-    public static final String SERVER_IMAGE = "http://www.ycxdfjy.com/drivers-school-main";
+    public static final String SERVER = "http://china-wx.wicp.net/drivers-app-main/";
+    public static final String SERVER_IMAGE = "http://china-wx.wicp.net/drivers-school-main";
+    //    public static final String SERVER = "http://www.ycxdfjy.com:8888/drivers-app-main/";
+//    public static final String SERVER_IMAGE = "http://www.ycxdfjy.com/drivers-school-main";
     public static final String LOGIN = SERVER + "user/app/dologin.do";
     public static final String GET_TEACHER = SERVER + "driversApp/driversTeacher/getTeacher.do";
     public static final String GET_TEACHER_CAR = SERVER + "driversApp/driversCar/initTeacherCar.do";
@@ -24,6 +24,7 @@ public class Urls {
     public static final String GET_APP_BESPEAK = SERVER + "driversApp/statistical/teacherAppBespeak";
     public static final String UPDATE_MESSAGE = SERVER + "driversApp/driversMessage/updateMessageState.do";
     public static final String GET_MESSAGE_COUNT = SERVER + "driversApp/baseSysMessage/selectSysMes.do";
+    public static final String GET_ASSEMBLE_TRAIN = SERVER + "driversApp/driversAssembleTrainingTime/getList.do";
     // 验证用户帐号
     public static final String GET_VERIFICATY_INITFORGET = SERVER + "user/verificaty/initforget.do";
     // 获取验证码

@@ -56,6 +56,7 @@ public class TeacherResult implements Serializable {
      * isTeachar : null
      * stuCollection : null
      * goodCommPro : 0.8
+     * teacharJobType : 2
      */
 
     public String teacharId;
@@ -106,4 +107,6 @@ public class TeacherResult implements Serializable {
     public String isTeachar;
     public String stuCollection;
     public double goodCommPro;
+    public String teacharJobType;
+
 }
